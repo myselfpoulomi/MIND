@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 
 const MOBILE_BREAKPOINT = 768;
 
-function useIsMobile() {
+export function useIsMobile() {
   const [isMobile, setIsMobile] = React.useState(undefined);
 
   React.useEffect(() => {
@@ -18,20 +18,3 @@ function useIsMobile() {
   return !!isMobile;
 }
 
-export default function ResponsiveComponent() {
-  const isMobile = useIsMobile();
-
-  if (isMobile === undefined) {
-    return null; // Optional: show a loading spinner or placeholder
-  }
-
-  return (
-    <div>
-      {isMobile ? (
-        <p>You are using a mobile device.</p>
-      ) : (
-        <p>You are using a desktop device.</p>
-      )}
-    </div>
-  );
-}
