@@ -1,0 +1,14 @@
+{
+	"type": "module",
+	"dependencies": {
+	  "node": "^23.11.0",
+	  "express": "^5.1.0",
+	  "mongoose": "^8.13.2",
+	  "cors": "^2.8.5",
+	  "dotenv": "^16.5.0"
+	},
+	"scripts": {
+	  "start": "nodemon index"
+	}
+  }
+  
