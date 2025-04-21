@@ -1,6 +1,6 @@
-import Navbar from "@/components/ui/navbar";
-import Footer from "@/components/ui/footer";
-import AppointmentScheduler from "@/components/appointment-scheduler";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import AppointmentScheduler from "@/components/AppointmentScheduler";
 
 const Appointments = () => {
   return (

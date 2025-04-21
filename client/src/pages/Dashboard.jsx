@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Navbar from "@/components/ui/navbar";
-import Footer from "@/components/ui/footer";
-import MoodTracker from "@/components/mood-tracker";
-import TodoList from "@/components/todo-list";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MoodTracker from "@/components/MoodTracker";
+import TodoList from "@/components/TodoList";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

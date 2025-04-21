@@ -1,6 +1,6 @@
-import Navbar from "@/components/ui/navbar";
-import Footer from "@/components/ui/footer";
-import EmergencyContacts from "@/components/emergency-contacts";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import EmergencyContacts from "@/components/EmergencyContacts";
 
 const Emergency = () => {
   return (

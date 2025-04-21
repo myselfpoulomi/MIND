@@ -1,6 +1,6 @@
-import Navbar from "@/components/ui/navbar";
-import Footer from "@/components/ui/footer";
-import MeditationCard from "@/components/meditation-card";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MeditationCard from "@/components/MeditationCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";

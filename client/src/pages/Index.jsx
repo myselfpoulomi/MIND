@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import Navbar from "@/components/ui/navbar";
-import Footer from "@/components/ui/footer";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, ArrowRight, Calendar, Music, List, MessageCircle } from "lucide-react";
