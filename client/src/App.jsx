@@ -1,9 +1,14 @@
-import React from 'react'
-import './index.css'
+import React, { useState } from 'react';
+import { Button } from './components/ui/button';
+
 function App() {
+  const [clicked, setClicked] = useState(1);
+
   return (
-    <div className='border border-black'>App</div>
-  )
+    <div className="p-4">
+    App
+    </div>
+  );
 }
 
-export default App
+export default App;
