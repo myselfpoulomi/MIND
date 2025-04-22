@@ -122,7 +122,7 @@ const Music = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-16">
+      <main className="flex-grow pt-24 pb-16 bg-[#F9FAFB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <section className="mb-12">
@@ -132,7 +132,7 @@ const Music = () => {
                 alt="Music for wellbeing" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-mind-blue-dark/80 to-transparent flex items-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1A8AAE] to-transparent flex items-center">
                 <div className="max-w-lg px-6 md:px-10">
                   <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                     Calming Music
@@ -197,7 +197,7 @@ const Music = () => {
                       </div>
                       <h3 className="text-xl font-semibold mt-3">{playlist.title}</h3>
                       <p className="text-gray-600">{playlist.description}</p>
-                      <Button className="mt-4 w-full bg-mind-blue hover:bg-mind-blue-dark">
+                      <Button className="mt-4 w-full hover:bg-[#1EAEDB] bg-[#1eafdbe0]">
                         Play All
                       </Button>
                     </div>
@@ -245,25 +245,25 @@ const Music = () => {
           </section>
           
           {/* Benefits Section */}
-          <section className="bg-mind-blue-light rounded-lg p-6 mb-12">
-            <h2 className="text-xl font-semibold text-mind-blue-dark mb-4">
+          <section className="bg-[#D3E4FD] rounded-lg p-6 mb-12">
+            <h2 className="text-xl font-semibold text-[#6793d4] mb-4">
               Benefits of Music for Mental Health
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="p-4 bg-white rounded shadow-sm">
-                <h3 className="font-medium text-mind-blue-dark mb-2">Stress Reduction</h3>
+                <h3 className="font-medium text-[#6793d4] mb-2">Stress Reduction</h3>
                 <p className="text-gray-600 text-sm">
                   Listening to calming music can lower cortisol levels and reduce feelings of stress and anxiety.
                 </p>
               </div>
               <div className="p-4 bg-white rounded shadow-sm">
-                <h3 className="font-medium text-mind-blue-dark mb-2">Improved Sleep</h3>
+                <h3 className="font-medium text-[#6793d4] mb-2">Improved Sleep</h3>
                 <p className="text-gray-600 text-sm">
                   Soothing music before bedtime can help you fall asleep faster and improve sleep quality.
                 </p>
               </div>
               <div className="p-4 bg-white rounded shadow-sm">
-                <h3 className="font-medium text-mind-blue-dark mb-2">Enhanced Focus</h3>
+                <h3 className="font-medium text-[#6793d4] mb-2">Enhanced Focus</h3>
                 <p className="text-gray-600 text-sm">
                   Certain types of music can boost concentration and productivity during tasks requiring focus.
                 </p>
