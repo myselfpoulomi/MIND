@@ -46,7 +46,7 @@ import {
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <Button className="w-full bg-mind-purple hover:bg-mind-purple-dark">
+          <Button className="w-full bg-[#8e85e0] hover:bg-[#5d55a7]">
             Start Session
           </Button>
         </CardFooter>

@@ -116,7 +116,7 @@ const Meditation = () => {
                 alt="Meditation and yoga" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-mind-purple/80 to-transparent flex items-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#827EBD] to-transparent flex items-center">
                 <div className="max-w-lg px-6 md:px-10">
                   <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
                     Meditation & Yoga
@@ -189,7 +189,7 @@ const Meditation = () => {
             </Tabs>
             
             {/* Tips Section */}
-            <div className="bg-mind-purple-light rounded-lg p-6 mb-12">
+            <div className="bg-[#b9b3f196] rounded-lg p-6 mb-12">
               <h2 className="text-xl font-semibold text-mind-purple-dark mb-4">Meditation Tips for Beginners</h2>
               <ul className="space-y-2 text-gray-700">
                 <li className="flex items-start">
