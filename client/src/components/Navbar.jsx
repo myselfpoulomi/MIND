@@ -1,7 +1,18 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Heart, Home, Music, List, Calendar, MessageCircle, Phone, Info, User } from "lucide-react";
+import {
+  HeartHandshake ,
+  Heart,
+  Home,
+  Music,
+  List,
+  Calendar,
+  MessageCircle,
+  Phone,
+  Info,
+  User,
+} from "lucide-react";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -16,51 +27,77 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-mind-purple" />
-              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-mind-purple to-mind-blue-dark bg-clip-text text-transparent">
+              <HeartHandshake className="h-8 w-8 text-[#8e89bd]" />
+              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-[#8e89bd] to-[#9B87F5] bg-clip-text text-transparent">
                 MIND
               </span>
             </Link>
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-center space-x-4">
-              <Link to="/" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Home
               </Link>
-              <Link to="/dashboard" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/dashboard"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Dashboard
               </Link>
-              <Link to="/meditation" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/meditation"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Meditation
               </Link>
-              <Link to="/music" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/music"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Music
               </Link>
-              <Link to="/todos" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/todos"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Tasks
               </Link>
-              <Link to="/appointments" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/appointments"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Appointments
               </Link>
-              <Link to="/support" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/support"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 Support
               </Link>
-              <Link to="/about" className="text-gray-700 hover:text-mind-purple px-3 py-2 rounded-md text-sm font-medium">
+              <Link
+                to="/about"
+                className="text-gray-700 hover:text-[#7f76c4] px-3 py-2 rounded-md text-sm font-medium"
+              >
                 About
               </Link>
             </div>
           </div>
-          
+
           <div className="hidden md:block">
-            <Button variant="default" asChild className="bg-mind-purple hover:bg-mind-purple-dark">
-              <Link to="/subscription">
-                Try Premium
-              </Link>
+            <Button
+              variant="default"
+              asChild
+              className="bg-[#9B91E3] hover:bg-[#7f76c4]"
+            >
+              <Link to="/subscription">Try Premium</Link>
             </Button>
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="md:hidden">
             <button
@@ -69,7 +106,7 @@ const Navbar = () => {
             >
               <span className="sr-only">Open main menu</span>
               <svg
-                className={`${isMobileMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
+                className={`${isMobileMenuOpen ? "hidden" : "block"} h-6 w-6`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -84,7 +121,7 @@ const Navbar = () => {
                 />
               </svg>
               <svg
-                className={`${isMobileMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
+                className={`${isMobileMenuOpen ? "block" : "hidden"} h-6 w-6`}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -104,66 +141,100 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isMobileMenuOpen ? 'block' : 'hidden'} md:hidden bg-white`}>
+      <div
+        className={`${
+          isMobileMenuOpen ? "block" : "hidden"
+        } md:hidden bg-white`}
+      >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <Link to="/" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/"
+            className="text-gray-700 hhover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Home className="mr-2 h-5 w-5" />
               Home
             </div>
           </Link>
-          <Link to="/dashboard" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/dashboard"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <User className="mr-2 h-5 w-5" />
               Dashboard
             </div>
           </Link>
-          <Link to="/meditation" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/meditation"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Heart className="mr-2 h-5 w-5" />
               Meditation
             </div>
           </Link>
-          <Link to="/music" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/music"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Music className="mr-2 h-5 w-5" />
               Music
             </div>
           </Link>
-          <Link to="/todos" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/todos"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <List className="mr-2 h-5 w-5" />
               Tasks
             </div>
           </Link>
-          <Link to="/appointments" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/appointments"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Calendar className="mr-2 h-5 w-5" />
               Appointments
             </div>
           </Link>
-          <Link to="/support" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/support"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <MessageCircle className="mr-2 h-5 w-5" />
               Support
             </div>
           </Link>
-          <Link to="/emergency" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/emergency"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Phone className="mr-2 h-5 w-5" />
               Emergency
             </div>
           </Link>
-          <Link to="/about" className="text-gray-700 hover:text-mind-purple block px-3 py-2 rounded-md text-base font-medium">
+          <Link
+            to="/about"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+          >
             <div className="flex items-center">
               <Info className="mr-2 h-5 w-5" />
               About
             </div>
           </Link>
+
           <Link to="/subscription">
-          <button className="bg-red-600 text-black hover:bg-mind-purple-dark block px-3 py-2 rounded-md text-base font-medium mt-4">
-          Try Premium
-          </button>
+            <div className="mt-4">
+              <Button className="hover:text-[#7f76c4] text-white hover:bg-purple-800">
+                Try Premium
+              </Button>
+            </div>
           </Link>
         </div>
       </div>
