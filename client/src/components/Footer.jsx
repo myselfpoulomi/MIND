@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { HeartHandshake } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white/80 backdrop-blur-md pt-10 pb-6">
+    <footer className="bg-gray-50 backdrop-blur-md pt-10 pb-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
             <Link to="/" className="flex items-center">
-              <Heart className="h-8 w-8 text-mind-purple" />
-              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-mind-purple to-mind-blue-dark bg-clip-text text-transparent">
+              <HeartHandshake className="h-8 w-8  text-[#8e89bd]" />
+              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-[#8e89bd] to-[#7b779e] bg-clip-text text-transparent">
                 MIND
               </span>
             </Link>
