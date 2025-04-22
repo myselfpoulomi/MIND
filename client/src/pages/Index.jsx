@@ -11,18 +11,18 @@ const Index = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-16 bg-gradient-to-br from-mind-purple-light via-white to-mind-blue-light">
+      <section className="pt-24 pb-16 bg-gradient-to-br from-[#EAE4FF] via-white to-[#D8E7FD]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 md:pr-8">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Begin Your Mental <span className="text-mind-purple">Wellbeing</span> Journey
+                Begin Your Mental <span className="text-[#9B87F5]">Wellbeing</span> Journey
               </h1>
               <p className="mt-4 text-xl text-gray-600">
                 Discover tools to improve your mental health, practice self-care, and connect with professional support.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-mind-purple hover:bg-mind-purple-dark" asChild>
+                <Button size="lg" className="bg-[#9B87F5] hover:bg-[#7e79a7]" asChild>
                   <Link to="/dashboard">
                     Start Your Journey
                   </Link>
@@ -56,16 +56,16 @@ const Index = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="bg-mind-purple-light border-none hover:shadow-md transition-shadow">
+            <Card className="bg-[#E5DEFF] border-none hover:shadow-md transition-shadow">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
-                  <Heart className="h-8 w-8 text-mind-purple" />
+                  <Heart className="h-8 w-8 text-[#9B87F5]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Meditation & Yoga</h3>
                 <p className="text-gray-600 mb-4">
                   Guided sessions for relaxation, focus, sleep, and anxiety
                 </p>
-                <Button variant="link" asChild className="text-mind-purple-dark">
+                <Button variant="link" asChild className="text-[#7b68ce]">
                   <Link to="/meditation" className="flex items-center">
                     Explore <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
@@ -73,16 +73,16 @@ const Index = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-mind-blue-light border-none hover:shadow-md transition-shadow">
+            <Card className="bg-[#D3E4FD] border-none hover:shadow-md transition-shadow">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
-                  <Music className="h-8 w-8 text-mind-blue" />
+                  <Music className="h-8 w-8 text-[#33C3F0]" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Calming Music</h3>
                 <p className="text-gray-600 mb-4">
                   Curated playlists to help you relax, focus, and sleep better
                 </p>
-                <Button variant="link" asChild className="text-mind-blue-dark">
+                <Button variant="link" asChild className="text-[#2a95b6]">
                   <Link to="/music" className="flex items-center">
                     Listen <ArrowRight className="ml-1 h-4 w-4" />
                   </Link>
@@ -90,7 +90,7 @@ const Index = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-mind-pink-light border-none hover:shadow-md transition-shadow">
+            <Card className="bg-[#FFDEE2] border-none hover:shadow-md transition-shadow">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
                   <List className="h-8 w-8 text-pink-400" />
@@ -107,7 +107,7 @@ const Index = () => {
               </CardContent>
             </Card>
             
-            <Card className="bg-gray-50 border-none hover:shadow-md transition-shadow">
+            <Card className="bg-[#b2e9c8] border-none hover:shadow-md transition-shadow">
               <CardContent className="p-6 text-center">
                 <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
                   <Calendar className="h-8 w-8 text-green-500" />
@@ -128,13 +128,13 @@ const Index = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="py-16 bg-mind-purple">
+      <section className="py-16 bg-[#9B87F5]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Start Your Wellness Journey Today</h2>
           <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Take the first step towards better mental health with our comprehensive tools and professional support.
           </p>
-          <Button size="lg" className="bg-white text-mind-purple hover:bg-gray-100" asChild>
+          <Button size="lg" className="bg-white text-[#9B87F5] hover:bg-gray-100" asChild>
             <Link to="/dashboard">
               Try Now For Free
             </Link>
@@ -156,8 +156,8 @@ const Index = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-mind-purple-light flex items-center justify-center">
-                    <span className="text-mind-purple font-bold">RP</span>
+                  <div className="w-12 h-12 rounded-full bg-[#E5DEFF] flex items-center justify-center">
+                    <span className="text-[#9B87F5] font-bold">RP</span>
                   </div>
                   <div className="ml-4">
                     <h4 className="font-semibold">Rahul P.</h4>
@@ -173,8 +173,8 @@ const Index = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-mind-blue-light flex items-center justify-center">
-                    <span className="text-mind-blue font-bold">SK</span>
+                  <div className="w-12 h-12 rounded-full bg-[#D3E4FD] flex items-center justify-center">
+                    <span className="text-[#33C9F5] font-bold">SK</span>
                   </div>
                   <div className="ml-4">
                     <h4 className="font-semibold">Sneha K.</h4>
@@ -190,7 +190,7 @@ const Index = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-mind-pink-light flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-[#FFDEE2] flex items-center justify-center">
                     <span className="text-pink-500 font-bold">AM</span>
                   </div>
                   <div className="ml-4">
