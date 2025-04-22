@@ -28,7 +28,7 @@ const Todos = () => {
             <div className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-mind-purple-dark">Why Daily Tasks Matter</CardTitle>
+                  <CardTitle className="text-[#7E69AB]">Why Daily Tasks Matter</CardTitle>
                   <CardDescription>The science behind small actions</CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -58,13 +58,13 @@ const Todos = () => {
               
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-mind-purple-dark">Task Ideas</CardTitle>
+                  <CardTitle className="text-[#7E69AB]">Task Ideas</CardTitle>
                   <CardDescription>Simple actions for mental wellness</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="p-3 bg-mind-purple-light/50 rounded-md">
-                      <h3 className="font-medium text-mind-purple-dark">Self-Care</h3>
+                    <div className="p-3 bg-[#F2EEFF] rounded-md">
+                      <h3 className="font-medium text-[#7E69AB]">Self-Care</h3>
                       <ul className="mt-2 text-sm text-gray-600 space-y-1">
                         <li>Take a relaxing bath or shower</li>
                         <li>Drink 8 glasses of water</li>
@@ -73,8 +73,8 @@ const Todos = () => {
                       </ul>
                     </div>
                     
-                    <div className="p-3 bg-mind-blue-light/50 rounded-md">
-                      <h3 className="font-medium text-mind-blue-dark">Mindfulness</h3>
+                    <div className="p-3 bg-[#E9F1FE] rounded-md">
+                      <h3 className="font-medium text-[#1EAEDB]">Mindfulness</h3>
                       <ul className="mt-2 text-sm text-gray-600 space-y-1">
                         <li>Meditate for 5 minutes</li>
                         <li>Practice deep breathing for 3 minutes</li>
@@ -83,7 +83,7 @@ const Todos = () => {
                       </ul>
                     </div>
                     
-                    <div className="p-3 bg-mind-pink-light/50 rounded-md">
+                    <div className="p-3 bg-[#FFEEF0] rounded-md">
                       <h3 className="font-medium text-pink-700">Connection</h3>
                       <ul className="mt-2 text-sm text-gray-600 space-y-1">
                         <li>Call or message a friend</li>
