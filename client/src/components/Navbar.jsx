@@ -28,7 +28,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <HeartHandshake className="h-8 w-8 text-[#8e89bd]" />
-              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-[#8e89bd] to-[#9B87F5] bg-clip-text text-transparent">
+              <span className="ml-2 text-2xl font-bold bg-gradient-to-r from-[#8e89bd] to-[#7e79a7] bg-clip-text text-transparent">
                 MIND
               </span>
             </Link>
