@@ -51,7 +51,7 @@ const TodoList = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-mind-purple-dark">Mental Wellness Tasks</CardTitle>
+        <CardTitle className="text-[#7E7EC9]">Mental Wellness Tasks</CardTitle>
         <CardDescription>
           Small daily actions to improve your mental wellbeing
         </CardDescription>
@@ -68,7 +68,7 @@ const TodoList = () => {
                   id={`todo-${todo.id}`}
                   checked={todo.completed}
                   onCheckedChange={() => toggleTodoComplete(todo.id)}
-                  className="border-mind-purple-light data-[state=checked]:bg-mind-purple"
+                  className="border-[#7E7EC9] data-[state=checked]:bg-[#7E7EC9]"
                 />
                 <label
                   htmlFor={`todo-${todo.id}`}
@@ -109,7 +109,7 @@ const TodoList = () => {
             }
           }}
         />
-        <Button onClick={handleAddTodo} className="bg-mind-purple hover:bg-mind-purple-dark">
+        <Button onClick={handleAddTodo} className="bg-[#7E7EC9] hover:bg-[#6a6aaf]">
           <Plus className="h-4 w-4 mr-1" /> Add
         </Button>
       </CardFooter>

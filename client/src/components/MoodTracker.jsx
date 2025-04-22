@@ -31,7 +31,7 @@ const MoodTracker = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-mind-purple-dark">How are you feeling today?</CardTitle>
+        <CardTitle className="text-[#7E69AB]">How are you feeling today?</CardTitle>
         <CardDescription>Track your mood to gain insights into your emotional patterns</CardDescription>
       </CardHeader>
       <CardContent>
@@ -56,7 +56,7 @@ const MoodTracker = () => {
         <Button 
           onClick={handleSubmit} 
           disabled={!selectedMood}
-          className="w-full bg-mind-purple hover:bg-mind-purple-dark"
+          className="w-full bg-[#7E69AB] hover:bg-mind-purple-dark"
         >
           Log Mood
         </Button>

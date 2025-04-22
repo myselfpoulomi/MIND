@@ -9,8 +9,56 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Heart, Music, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 
+const dailyTips = [
+  {
+    title: "Practice Mindful Breathing",
+    content:
+      "Take 5 minutes to focus on your breath. Inhale for 4 counts, hold for 2, exhale for 6. This helps reduce anxiety and center your thoughts.",
+    category: "Mindfulness",
+  },
+  {
+    title: "Connect with Nature",
+    content:
+      "Spend at least 15 minutes outside today. Nature exposure has been shown to reduce stress hormones and improve mood.",
+    category: "Self-Care",
+  },
+  {
+    title: "Gratitude Practice",
+    content:
+      "Write down three things you're grateful for today. This simple habit can shift your mindset toward positivity and contentment.",
+    category: "Positive Psychology",
+  },
+];
+
+const quickLinks = [
+  {
+    title: "Meditation",
+    description: "Find peace through guided sessions",
+    icon: <Heart className="h-6 w-6" />,
+    to: "/meditation",
+    color: "bg-[#E5DEFF] text-[#8470B0]",
+  },
+  {
+    title: "Calming Music",
+    description: "Relax with soothing playlists",
+    icon: <Music className="h-6 w-6" />,
+    to: "/music",
+    color: "bg-[#D3E4FD] text-[#1EAEDB]",
+  },
+  {
+    title: "Appointments",
+    description: "Schedule time with professionals",
+    icon: <Calendar className="h-6 w-6" />,
+    to: "/appointments",
+    color: "bg-green-100 text-green-700",
+  },
+];
+
+
 const Dashboard = () => {
   const [tipIndex, setTipIndex] = useState(0);
+
+  
   
   const nextTip = () => {
     setTipIndex((prevIndex) => (prevIndex + 1) % dailyTips.length);
@@ -36,9 +84,9 @@ const Dashboard = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <Badge className="bg-mind-purple-light text-mind-purple-dark border-0">
+                    <Badge className="bg-[#dbcef7] text-[#473964] border-0">
                       {currentTip.category}
-                    </Badge>
+                    </Badge> 
                     <h3 className="font-semibold text-lg">{currentTip.title}</h3>
                     <p className="text-gray-600">{currentTip.content}</p>
                   </div>
@@ -67,7 +115,7 @@ const Dashboard = () => {
                       <Link 
                         key={index}
                         to={link.to}
-                        className="flex items-center p-3 rounded-lg border border-gray-100 hover:border-mind-purple-light transition-colors"
+                        className="flex items-center p-3 rounded-lg border border-gray-100 hover:border-[#E5DEFF] transition-colors"
                       >
                         <div className={`w-10 h-10 rounded-full ${link.color} flex items-center justify-center mr-3`}>
                           {link.icon}
@@ -112,7 +160,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                      <Button className="w-full bg-mind-purple hover:bg-mind-purple-dark" asChild>
+                      <Button className="w-full bg-[#9989da] hover:bg-[#7365ad]" asChild>
                         <Link to="/meditation">
                           Start Meditation
                         </Link>
@@ -133,7 +181,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                      <Button className="w-full bg-mind-blue hover:bg-mind-blue-dark" asChild>
+                      <Button className="w-full bg-[#5fafc7] hover:bg-[#599fb4]" asChild>
                         <Link to="/music">
                           Listen Now
                         </Link>
@@ -176,7 +224,7 @@ const Dashboard = () => {
                     Our network of licensed professionals is here to support you through your mental health journey.
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <Button className="bg-mind-purple hover:bg-mind-purple-dark" asChild>
+                    <Button className="bg-[#7E7EC9] hover:bg-[#6363a0]" asChild>
                       <Link to="/appointments">
                         Schedule Appointment
                       </Link>
