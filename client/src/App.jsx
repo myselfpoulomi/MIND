@@ -14,6 +14,7 @@ import Emergency from "./pages/emergency";
 import About from "./pages/about";
 import Subscription from "./pages/subscription";
 import NotFound from "./pages/NotFound";
+import Login from './pages/Login'
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/emergency" element={<Emergency />} />
             <Route path="/about" element={<About />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

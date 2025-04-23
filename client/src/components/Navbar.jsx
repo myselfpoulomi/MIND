@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
-  HeartHandshake ,
+  HeartHandshake,
   Heart,
   Home,
   Music,
@@ -88,7 +88,15 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="hidden md:block">
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex space-x-2">
+            <Button
+              variant="outline"
+              asChild
+              className="border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff]"
+            >
+              <Link to="/login">Login</Link>
+            </Button>
             <Button
               variant="default"
               asChild
@@ -149,7 +157,7 @@ const Navbar = () => {
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           <Link
             to="/"
-            className="text-gray-700 hhover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
+            className="text-gray-700 hover:text-[#7f76c4] block px-3 py-2 rounded-md text-base font-medium"
           >
             <div className="flex items-center">
               <Home className="mr-2 h-5 w-5" />
@@ -229,13 +237,21 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <Link to="/subscription">
-            <div className="mt-4">
-              <Button className="hover:text-[#7f76c4] text-white hover:bg-purple-800">
+          <div className="mt-4 space-y-2">
+            <Link to="/login">
+              <Button
+                variant="outline"
+                className="w-full border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff]"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link to="/subscription">
+              <Button className="w-full text-white bg-[#9B91E3] hover:bg-[#7f76c4]">
                 Try Premium
               </Button>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
       </div>
     </nav>
