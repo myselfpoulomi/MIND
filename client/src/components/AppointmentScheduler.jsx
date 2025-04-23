@@ -89,7 +89,7 @@ const AppointmentScheduler = () => {
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-mind-purple-dark">
+        <CardTitle className="text-[#7F76C4]">
           Schedule an Appointment
         </CardTitle>
         <CardDescription>
@@ -164,7 +164,7 @@ const AppointmentScheduler = () => {
                   onClick={() => setSelectedTime(time)}
                   className={
                     selectedTime === time
-                      ? "bg-mind-purple hover:bg-mind-purple-dark"
+                      ? "bg-[#7F76C4] hover:bg-[#7F76C4]"
                       : ""
                   }
                 >
@@ -212,7 +212,7 @@ const AppointmentScheduler = () => {
       <CardFooter>
         <Button
           onClick={handleSchedule}
-          className="w-full bg-mind-purple hover:bg-mind-purple-dark"
+          className="w-full bg-[#8076cc] hover:bg-[#6e62c2]"
           disabled={
             !selectedDate || !selectedDoctor || !selectedTime || !name || !email
           }

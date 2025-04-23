@@ -24,7 +24,7 @@ const Appointments = () => {
           
           {/* Info Section */}
           <div className="max-w-3xl mx-auto mt-12 bg-white rounded-lg shadow-sm overflow-hidden">
-            <div className="bg-mind-purple p-6">
+            <div className="bg-[#9B87F5] p-6">
               <h2 className="text-xl font-semibold text-white">What to Expect</h2>
             </div>
             <div className="p-6">
