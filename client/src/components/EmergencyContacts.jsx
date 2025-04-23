@@ -82,7 +82,7 @@ const EmergencyContacts = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                  <Button onClick={() => handleCallNumber(contact.phoneNumber)} className="bg-mind-purple hover:bg-mind-purple-dark">
+                  <Button onClick={() => handleCallNumber(contact.phoneNumber)} className="bg-[#9B87F5] hover:bg-[#7364b9]">
                     <Phone className="h-4 w-4 mr-2" /> {contact.phoneNumber}
                   </Button>
 

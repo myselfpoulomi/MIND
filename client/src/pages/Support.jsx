@@ -106,7 +106,7 @@ const Support = () => {
                             <div
                               className={`max-w-[80%] p-3 rounded-lg ${
                                 message.sender === "user"
-                                  ? "bg-mind-purple text-white"
+                                  ? "bg-[#9B87F5] text-white"
                                   : "bg-gray-100 text-gray-800"
                               }`}
                             >
@@ -147,7 +147,7 @@ const Support = () => {
                         />
                         <Button
                           onClick={handleSendMessage}
-                          className="bg-mind-purple hover:bg-mind-purple-dark"
+                          className="bg-[#9B87F5] hover:bg-[#7e6dca]"
                         >
                           <Send className="h-4 w-4" />
                         </Button>
@@ -189,7 +189,7 @@ const Support = () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <Button
-                        className="w-full flex items-center justify-center gap-2 bg-mind-purple hover:bg-mind-purple-dark"
+                        className="w-full flex items-center justify-center gap-2 bg-[#9B87F5] hover:bg-[#7868be]"
                         asChild
                       >
                         <Link to="/appointments">
@@ -224,7 +224,7 @@ const Support = () => {
                             className="resize-none min-h-[100px]"
                           />
                         </div>
-                        <Button className="w-full bg-mind-purple hover:bg-mind-purple-dark">
+                        <Button className="w-full bg-[#9B87F5] hover:bg-[#6c5eac]">
                           Send Message
                         </Button>
                       </form>
@@ -254,7 +254,7 @@ const Support = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-xl">Mental Health Articles</CardTitle>
+                    <CardTitle className="text-xl text-[#7F76C4]">Mental Health Articles</CardTitle>
                     <CardDescription>
                       Educational content for awareness
                     </CardDescription>
@@ -262,22 +262,109 @@ const Support = () => {
                   <CardContent>
                     <ul className="space-y-3">
                       <li>
-                        <Link to="#" className="text-mind-purple hover:text-mind-purple-dark">
-                          Coping Strategies for Anxiety
-                        </Link>
+                        <a href="#" className="text-blue-800 hover:underline">
+                          Understanding Anxiety: Causes and Coping Strategies
+                        </a>
                       </li>
                       <li>
-                        <Link to="#" className="text-mind-purple hover:text-mind-purple-dark">
-                          Managing Depression: A Guide
-                        </Link>
+                        <a href="#" className="text-blue-800 hover:underline">
+                          The Importance of Sleep for Mental Health
+                        </a>
                       </li>
                       <li>
-                        <Link to="#" className="text-mind-purple hover:text-mind-purple-dark">
-                          Stress Reduction Techniques
-                        </Link>
+                        <a href="#" className="text-blue-800 hover:underline">
+                          Mindfulness Techniques for Daily Life
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="text-blue-800 hover:underline">
+                          Recognizing Signs of Depression
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#" className="text-blue-800 hover:underline">
+                          Building Resilience in Challenging Times
+                        </a>
                       </li>
                     </ul>
                   </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full">
+                      View All Articles
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-xl text-[#7F76C4]">Support Groups</CardTitle>
+                    <CardDescription>
+                      Connect with others for mutual support
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="p-3 bg-gray-50 rounded-md">
+                        <h3 className="font-medium">Anxiety Support Group</h3>
+                        <p className="text-sm text-gray-600">Tuesdays at 7:00 PM</p>
+                        <Badge className="mt-2" variant="outline">Online</Badge>
+                      </li>
+                      <li className="p-3 bg-gray-50 rounded-md">
+                        <h3 className="font-medium">Depression Recovery</h3>
+                        <p className="text-sm text-gray-600">Thursdays at 6:30 PM</p>
+                        <Badge className="mt-2" variant="outline">Online</Badge>
+                      </li>
+                      <li className="p-3 bg-gray-50 rounded-md">
+                        <h3 className="font-medium">Stress Management</h3>
+                        <p className="text-sm text-gray-600">Saturdays at 10:00 AM</p>
+                        <Badge className="mt-2" variant="outline">Online</Badge>
+                      </li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full">
+                      Join a Group
+                    </Button>
+                  </CardFooter>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-xl text-[#7F76C4]">Recommended Books</CardTitle>
+                    <CardDescription>
+                      Reading material for mental wellness
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3">
+                      <li className="flex gap-3">
+                        <div className="w-16 h-20 bg-gray-200 rounded"></div>
+                        <div>
+                          <h3 className="font-medium">The Anxiety & Worry Workbook</h3>
+                          <p className="text-sm text-gray-600">By David A. Clark</p>
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <div className="w-16 h-20 bg-gray-200 rounded"></div>
+                        <div>
+                          <h3 className="font-medium">Feeling Good</h3>
+                          <p className="text-sm text-gray-600">By David D. Burns</p>
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <div className="w-16 h-20 bg-gray-200 rounded"></div>
+                        <div>
+                          <h3 className="font-medium">The Mindful Way Through Depression</h3>
+                          <p className="text-sm text-gray-600">By Mark Williams</p>
+                        </div>
+                      </li>
+                    </ul>
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" className="w-full">
+                      See All Recommendations
+                    </Button>
+                  </CardFooter>
                 </Card>
               </div>
             </TabsContent>
