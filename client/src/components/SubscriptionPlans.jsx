@@ -93,7 +93,7 @@ const SubscriptionPlans = () => {
             onClick={() => setBillingCycle("monthly")}
             className={
               billingCycle === "monthly"
-                ? "bg-mind-purple hover:bg-mind-purple-dark"
+                ? "bg-[#9b87f5] hover:bg-mind-purple-dark"
                 : ""
             }
           >
@@ -104,7 +104,7 @@ const SubscriptionPlans = () => {
             onClick={() => setBillingCycle("halfyearly")}
             className={
               billingCycle === "halfyearly"
-                ? "bg-mind-purple hover:bg-mind-purple-dark"
+                ? "bg-[#9b87f5] hover:bg-mind-purple-dark"
                 : ""
             }
           >
@@ -115,7 +115,7 @@ const SubscriptionPlans = () => {
             onClick={() => setBillingCycle("yearly")}
             className={
               billingCycle === "yearly"
-                ? "bg-mind-purple hover:bg-mind-purple-dark"
+                ? "bg-[#9b87f5] hover:bg-[#5a4e8f]"
                 : ""
             }
           >
@@ -129,11 +129,11 @@ const SubscriptionPlans = () => {
           <Card
             key={plan.id}
             className={`relative ${
-              plan.popular ? "border-mind-purple shadow-lg" : "border-gray-200"
+              plan.popular ? "border-[#9b87f5] shadow-lg" : "border-gray-200"
             }`}
           >
             {plan.popular && (
-              <Badge className="absolute top-4 right-4 bg-mind-purple hover:bg-mind-purple">
+              <Badge className="absolute top-4 right-4 bg-[#9b87f5] hover:bg-[#6b5dac]">
                 Popular
               </Badge>
             )}
@@ -188,7 +188,7 @@ const SubscriptionPlans = () => {
                 className={`w-full ${
                   plan.id === "free"
                     ? "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                    : "bg-mind-purple hover:bg-mind-purple-dark"
+                    : "bg-[#9b87f5] hover:bg-[#7464b9]"
                 }`}
               >
                 {plan.id === "free" ? "Current Plan" : "Subscribe Now"}
