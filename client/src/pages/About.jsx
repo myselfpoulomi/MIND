@@ -19,7 +19,7 @@ const About = () => {
                 We're dedicated to making mental health support accessible to everyone through technology, education, and community.
               </p>
               <div className="flex justify-center">
-                <Button className="bg-mind-purple hover:bg-mind-purple-dark" asChild>
+                <Button className="bg-[#9e93e9] hover:bg-[#8076c5]" asChild>
                   <Link to="/dashboard">
                     Start Your Journey
                   </Link>
@@ -54,14 +54,14 @@ const About = () => {
           </section>
           
           {/* Core Values */}
-          <section className="mb-16 py-12 bg-mind-purple-light/50 rounded-xl">
+          <section className="mb-16 py-12 bg-[#EFEAFF] rounded-xl">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Our Core Values</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card className="bg-white/70 backdrop-blur-sm">
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-mind-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mind-purple">
+                    <div className="w-16 h-16 bg-[#F1EDFE] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#9B87F5]">
                         <rect width="18" height="18" x="3" y="3" rx="2" />
                         <path d="M9 9h6v6H9z" />
                       </svg>
@@ -75,8 +75,8 @@ const About = () => {
                 
                 <Card className="bg-white/70 backdrop-blur-sm">
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-mind-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mind-purple">
+                    <div className="w-16 h-16 bg-[#F1EDFE] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#9B87F5]">
                         <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
                       </svg>
                     </div>
@@ -89,8 +89,8 @@ const About = () => {
                 
                 <Card className="bg-white/70 backdrop-blur-sm">
                   <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-mind-purple/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mind-purple">
+                    <div className="w-16 h-16 bg-[#F1EDFE] rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#9B87F5]">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
                         <circle cx="9" cy="7" r="4" />
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -177,6 +177,25 @@ const About = () => {
               <div className="w-32 h-20 bg-gray-100 rounded-md flex items-center justify-center">
                 <div className="text-gray-400 font-semibold">Partner 5</div>
               </div>
+            </div>
+          </section>
+
+          <section className="mb-12 bg-[#E5DEFF] p-8 rounded-xl text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Join Our Mission</h2>
+            <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
+              Ready to be part of a movement that's changing how we approach mental health?
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" className="bg-[#9b87f5] hover:bg-[#7c6cc2]" asChild>
+                <Link to="/dashboard">
+                  Try Our Tools
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <Link to="/subscription">
+                  See Premium Plans
+                </Link>
+              </Button>
             </div>
           </section>
         </div>
