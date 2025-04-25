@@ -15,6 +15,7 @@ import About from "./pages/about";
 import Subscription from "./pages/subscription";
 import NotFound from "./pages/NotFound";
 import Login from './pages/Login'
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const queryClient = new QueryClient();
 
@@ -25,20 +26,23 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/meditation" element={<Meditation />} />
-            <Route path="/music" element={<Music />} />
-            <Route path="/todos" element={<Todos />} />
-            <Route path="/appointments" element={<Appointments />} />
-            <Route path="/support" element={<Support />} />
-            <Route path="/emergency" element={<Emergency />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/subscription" element={<Subscription />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+      <Route path="/" element={<Index />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/meditation" element={<Meditation />} />
+        <Route path="/music" element={<Music />} />
+        <Route path="/todos" element={<Todos />} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/emergency" element={<Emergency />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/subscription" element={<Subscription />} />
+      </Route>
+    </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
