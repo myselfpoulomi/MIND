@@ -93,7 +93,7 @@ const Navbar = () => {
             <Button
               variant="outline"
               asChild
-              className="border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff]"
+              className="border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff] px-8"
             >
               <Link to="/login">Login</Link>
             </Button>
