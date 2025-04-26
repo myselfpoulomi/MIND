@@ -3,10 +3,10 @@ import Footer from "@/components/Footer";
 import TodoList from "@/components/TodoList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
-const Todos = () => {
+const Todos = ({session,setRefetch}) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+        <Navbar session={session} setRefetch={setRefetch} />
       
       <main className="flex-grow pt-24 pb-16 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

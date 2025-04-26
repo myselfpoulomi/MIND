@@ -101,10 +101,10 @@ const yogaSessions = [
   },
 ];
 
-const Meditation = () => {
+const Meditation = ({session,setRefetch}) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar session={session} setRefetch={setRefetch} />
       
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

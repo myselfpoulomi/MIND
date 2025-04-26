@@ -21,7 +21,7 @@ const supportTopics = [
   { id: "self-esteem", label: "Self-Esteem", color: "bg-green-100 text-green-800" },
 ];
 
-const Support = () => {
+const Support = ({session,setRefetch}) => {
   const [chatInput, setChatInput] = useState("");
   const [messages, setMessages] = useState([
     {
@@ -71,7 +71,7 @@ const Support = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+        <Navbar session={session} setRefetch={setRefetch} />
 
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

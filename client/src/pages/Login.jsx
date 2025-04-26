@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import { HeartHandshake } from "lucide-react";
 
-const Login = () => {
+const Login = ({setRefetch}) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle auth logic here
-    navigate('/');
+    const session = email;
+    localStorage.setItem("session", session);
+    setRefetch((prev)=>!prev)
+    navigate("/");
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-white p-6 gap-8">
       <Link to="/" className="flex items-center flex-col space-y-1">
-        <div className='flex items-center'>
+        <div className="flex items-center">
           <HeartHandshake className="h-9 w-9 text-[#8e89bd]" />
           <span className="ml-2 text-3xl font-bold bg-gradient-to-r from-[#8e89bd] to-[#7e79a7] bg-clip-text text-transparent">
             MIND
@@ -75,7 +77,9 @@ const Login = () => {
               {isLogin ? "Login" : "Sign Up"}
             </Button>
             <p className="text-center text-sm text-gray-600">
-              {isLogin ? "Don't have an account? " : "Already have an account? "}
+              {isLogin
+                ? "Don't have an account? "
+                : "Already have an account? "}
               <button
                 type="button"
                 onClick={() => setIsLogin(!isLogin)}

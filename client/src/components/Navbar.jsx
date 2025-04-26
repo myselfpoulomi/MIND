@@ -13,13 +13,22 @@ import {
   Info,
   User,
 } from "lucide-react";
+import {useNavigate} from "react-router-dom"
 
-const Navbar = () => {
+const Navbar = ({session}) => {
+  const navigation = useNavigate()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const hanldeLogout = ()=>{
+    if(session){
+      localStorage.removeItem("session");
+      setRefetch((prev)=>!prev);
+    }
+  }
 
   return (
     <nav className="bg-white/80 backdrop-blur-md fixed w-full z-50 shadow-sm">
@@ -90,19 +99,29 @@ const Navbar = () => {
 
           {/* Desktop Buttons */}
           <div className="hidden md:flex space-x-2">
-            <Button
+            {/* <Button
+            onClick={hanldeLogoutLogin}
               variant="outline"
               asChild
               className="border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff] px-8"
             >
-              <Link to="/login">Login</Link>
-            </Button>
+              {session ? "Logout" : "Login"}
+            </Button> */}
             <Button
               variant="default"
               asChild
               className="bg-[#9B91E3] hover:bg-[#7f76c4]"
             >
               <Link to="/subscription">Try Premium</Link>
+            </Button>
+
+            <Button
+              variant="default"
+              asChild
+              onClick={hanldeLogout}
+              className="bg-[#9B91E3] hover:bg-[#7f76c4]"
+            >
+              <Link to={session?"/":"/login"}>{session?"Logout":"Login"}</Link>
             </Button>
           </div>
 
@@ -237,15 +256,16 @@ const Navbar = () => {
             </div>
           </Link>
 
+          <Button asChild className="w-full text-white bg-[#9B91E3] hover:bg-[#7f76c4]">
+  <Link to="/subscription">
+    Try Premium
+  </Link>
+</Button>
+
+
           <div className="mt-4 space-y-2">
-            <Link to="/login">
-              <Button
-                variant="outline"
-                className="w-full border-[#9B91E3] text-[#7f76c4] hover:bg-[#edeaff]"
-              >
-                Login
-              </Button>
-            </Link>
+          
+     
             <Link to="/subscription">
               <Button className="w-full text-white bg-[#9B91E3] hover:bg-[#7f76c4]">
                 Try Premium

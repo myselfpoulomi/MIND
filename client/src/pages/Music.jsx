@@ -111,7 +111,7 @@ const playlists = [
 
 const categories = ["Relaxation", "Focus", "Sleep", "Meditation", "Nature", "Instrumental"];
 
-const Music = () => {
+const Music = ({session,setRefetch}) => {
   const [selectedTrack, setSelectedTrack] = useState(null);
   
   const handleSelectTrack = (track) => {
@@ -120,7 +120,7 @@ const Music = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar session={session} setRefetch={setRefetch} />
       
       <main className="flex-grow pt-24 pb-16 bg-[#F9FAFB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

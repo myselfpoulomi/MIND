@@ -55,7 +55,7 @@ const quickLinks = [
 ];
 
 
-const Dashboard = () => {
+const Dashboard = ({session ,setRefetch}) => {
   const [tipIndex, setTipIndex] = useState(0);
 
   
@@ -68,7 +68,7 @@ const Dashboard = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar session={session} setRefetch={setRefetch}/>
       
       <main className="flex-grow pt-24 pb-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

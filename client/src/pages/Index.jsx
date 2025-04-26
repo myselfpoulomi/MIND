@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heart, ArrowRight, Calendar, Music, List, MessageCircle } from "lucide-react";
 
-const Index = () => {
+const Index = ({session,setRefetch}) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+      <Navbar session={session} setRefetch={setRefetch} />
       
       {/* Hero Section */}
       <section className="pt-24 pb-16 bg-gradient-to-br from-[#EAE4FF] via-white to-[#D8E7FD]">

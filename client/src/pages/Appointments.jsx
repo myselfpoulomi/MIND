@@ -2,10 +2,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AppointmentScheduler from "@/components/AppointmentScheduler";
 
-const Appointments = () => {
+const Appointments = ({session,setRefetch}) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
+     <Navbar session={session} setRefetch={setRefetch} />
       
       <main className="flex-grow pt-24 pb-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
