@@ -3,7 +3,8 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import UserRoutes from './routes/UserRoutes.js'; // Added .js and fixed typo
+import UserRoutes from './routes/UserRoutes.js'; // User routes
+import MoodRoutes from './routes/MoodRoutes.js'; // Added MoodLog routes
 
 dotenv.config();
 
@@ -26,7 +27,8 @@ mongoose
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use("/User", UserRoutes); // Fixed typo here too
+app.use("/User", UserRoutes); // User routes
+app.use("/moodlogs", MoodRoutes); // Added MoodLog routes
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
