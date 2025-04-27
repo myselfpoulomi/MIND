@@ -115,11 +115,8 @@ const Navbar = ({session}) => {
               <Link to="/subscription">Try Premium</Link>
             </Button>
 
-            <Button
-              variant="default"
-              asChild
+            <Button size="lg" variant="outline" asChild
               onClick={hanldeLogout}
-              className="bg-[#9B91E3] hover:bg-[#7f76c4]"
             >
               <Link to={session?"/":"/login"}>{session?"Logout":"Login"}</Link>
             </Button>
@@ -256,16 +253,11 @@ const Navbar = ({session}) => {
             </div>
           </Link>
 
-          <Button asChild className="w-full text-white bg-[#9B91E3] hover:bg-[#7f76c4]">
-  <Link to="/subscription">
-    Try Premium
-  </Link>
-</Button>
+          
 
 
           <div className="mt-4 space-y-2">
           
-     
             <Link to="/subscription">
               <Button className="w-full text-white bg-[#9B91E3] hover:bg-[#7f76c4]">
                 Try Premium
