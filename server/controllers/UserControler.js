@@ -1,6 +1,6 @@
 // controllers/UserControler.js
 
-import User from "../modules/UserSchema.js";
+import User from "../models/UserSchema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 

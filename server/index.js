@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import UserRoutes from './routes/UserRoutes.js'; // User routes
 import MoodRoutes from './routes/MoodRoutes.js'; // Added MoodLog routes
+import meditationYogaSessionRoutes from './routes/MeditationYogaSessionRoutes.js'
 
 dotenv.config();
 
@@ -27,8 +28,9 @@ mongoose
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // Routes
-app.use("/User", UserRoutes); // User routes
-app.use("/moodlogs", MoodRoutes); // Added MoodLog routes
+app.use("/api/user", UserRoutes); // User routes
+app.use("/api/moodlogs", MoodRoutes); // Added MoodLog routes
+app.use('/api/sessions', meditationYogaSessionRoutes); 
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

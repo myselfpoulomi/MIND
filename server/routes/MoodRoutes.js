@@ -1,5 +1,5 @@
 import express from 'express';
-import { createMoodLog, getMoodLogs, getMoodLogById } from '../controlers/MoodControler.js';
+import { createMoodLog, getMoodLogs, getMoodLogById } from '../controllers/MoodControler.js';
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-import MoodLog from '../modules/moodLogSchema.js';
+import MoodLog from '../models/moodLogSchema.js';
 
 // Create a new mood log
  const createMoodLog = async (req, res) => {
