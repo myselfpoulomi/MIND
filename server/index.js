@@ -10,6 +10,10 @@ import PlaylistRoutes from './routes/PlaylistRoutes.js'
 import WellnessTaskRoutes from './routes/WellnessTaskRoutes.js'
 import professionalRoutes from './routes/ProfessionalRoutes.js'
 import chatSupportRoutes from './routes/ChatSupportRoutes.js'
+import emergencyResourceRoutes from './routes/EmergencyResourceRoutes.js'
+
+
+
 dotenv.config();
 
 const app = express();
@@ -38,6 +42,7 @@ app.use('/api/playlists', PlaylistRoutes);
 app.use('/api/tasks', WellnessTaskRoutes);
 app.use('/api/professionals', professionalRoutes);
 app.use('/api/chat', chatSupportRoutes);
+app.use('/api/resources', emergencyResourceRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
