@@ -5,8 +5,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import UserRoutes from './routes/UserRoutes.js'; // User routes
 import MoodRoutes from './routes/MoodRoutes.js'; // Added MoodLog routes
-import meditationYogaSessionRoutes from './routes/MeditationYogaSessionRoutes.js'
-import playlistRoutes from './routes/PlaylistRoutes.js'
+import MeditationYogaSessionRoutes from './routes/MeditationYogaSessionRoutes.js'
+import PlaylistRoutes from './routes/PlaylistRoutes.js'
+import WellnessTaskRoutes from './routes/WellnessTaskRoutes.js'
 
 dotenv.config();
 
@@ -31,8 +32,9 @@ mongoose
 // Routes
 app.use("/api/user", UserRoutes); // User routes
 app.use("/api/moodlogs", MoodRoutes); // Added MoodLog routes
-app.use('/api/sessions', meditationYogaSessionRoutes); 
-app.use('/api/playlists', playlistRoutes);
+app.use('/api/sessions', MeditationYogaSessionRoutes); 
+app.use('/api/playlists', PlaylistRoutes);
+app.use('/api/tasks', WellnessTaskRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
