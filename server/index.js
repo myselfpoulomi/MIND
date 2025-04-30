@@ -6,6 +6,7 @@ import cors from 'cors';
 import UserRoutes from './routes/UserRoutes.js'; // User routes
 import MoodRoutes from './routes/MoodRoutes.js'; // Added MoodLog routes
 import meditationYogaSessionRoutes from './routes/MeditationYogaSessionRoutes.js'
+import playlistRoutes from './routes/PlaylistRoutes.js'
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ mongoose
 app.use("/api/user", UserRoutes); // User routes
 app.use("/api/moodlogs", MoodRoutes); // Added MoodLog routes
 app.use('/api/sessions', meditationYogaSessionRoutes); 
+app.use('/api/playlists', playlistRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
