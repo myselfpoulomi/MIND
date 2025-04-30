@@ -11,7 +11,7 @@ import WellnessTaskRoutes from './routes/WellnessTaskRoutes.js'
 import professionalRoutes from './routes/ProfessionalRoutes.js'
 import chatSupportRoutes from './routes/ChatSupportRoutes.js'
 import emergencyResourceRoutes from './routes/EmergencyResourceRoutes.js'
-
+import subscriptionPlanRoutes from './routes/SubscriptionPlanRoutes.js'
 
 
 dotenv.config();
@@ -43,6 +43,7 @@ app.use('/api/tasks', WellnessTaskRoutes);
 app.use('/api/professionals', professionalRoutes);
 app.use('/api/chat', chatSupportRoutes);
 app.use('/api/resources', emergencyResourceRoutes);
+app.use('/api/plans', subscriptionPlanRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
