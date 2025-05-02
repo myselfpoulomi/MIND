@@ -77,7 +77,7 @@ const Meditation = ({ session, setRefetch }) => {
               <TabsList className="mb-6">
                 <TabsTrigger value="meditation">Meditation</TabsTrigger>
                 <TabsTrigger value="yoga">Yoga</TabsTrigger>
-                <TabsTrigger value="favorites">Favorites</TabsTrigger>
+                {/* <TabsTrigger value="favorites">Favorites</TabsTrigger> */}
               </TabsList>
 
               <TabsContent value="meditation">
@@ -122,11 +122,11 @@ const Meditation = ({ session, setRefetch }) => {
                 )}
               </TabsContent>
 
-              <TabsContent value="favorites">
+              {/* <TabsContent value="favorites">
                 <div className="text-center py-12">
                   <p className="text-gray-500">You haven't saved any favorites yet.</p>
                 </div>
-              </TabsContent>
+              </TabsContent> */}
             </Tabs>
 
             {/* Tips Section */}
