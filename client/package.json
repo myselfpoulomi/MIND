@@ -57,6 +57,7 @@
     "react-hook-form": "^7.55.0",
     "react-resizable-panels": "^2.1.7",
     "react-router-dom": "^7.4.1",
+    "react-youtube": "^10.1.0",
     "recharts": "^2.15.1",
     "shadcn-ui": "^0.9.5",
     "sonner": "^2.0.3",

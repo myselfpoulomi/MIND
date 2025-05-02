@@ -16,12 +16,12 @@ const MeditationYogaSessionSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  category: {
+  type: {
     type: String,
     required: true,
     enum: ['meditation', 'yoga'],
   },
-  tags: {
+  category: {
     type: [String],
     default: [],
   },
