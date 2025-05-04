@@ -26,34 +26,43 @@ const getUsersbyId = async (req, res) => {
 
 // Add a new user (Sign Up)
 const addUser = async (req, res) => {
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, currentPassword } = req.body;
 
-  if (!email || !password || !confirmPassword) {
-    return res.status(400).json({ message: "Email, password and confirm password are required" });
+  if (!email || !password || !confirmPassword || !currentPassword) {
+    return res.status(400).json({ message: "All fields are required." });
   }
 
   if (password !== confirmPassword) {
-    return res.status(400).json({ message: "Passwords do not match" });
+    return res.status(400).json({ message: "Passwords do not match." });
   }
 
   try {
     const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists." });
+    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedCurrentPassword = await bcrypt.hash(currentPassword, 10);
 
     const newUser = new User({
       email,
       password: hashedPassword,
+      currentPassword: hashedCurrentPassword,
     });
 
     await newUser.save();
 
-    res.status(201).json({ message: "User added successfully", user: { id: newUser._id, email: newUser.email } });
+    res.status(201).json({
+      message: "User added successfully",
+      user: { id: newUser._id, email: newUser.email },
+    });
   } catch (error) {
+    console.error("Signup error:", error);
     res.status(500).json({ message: "Failed to add user", error });
   }
 };
+
 
 // User login
 const loginUser = async (req, res) => {

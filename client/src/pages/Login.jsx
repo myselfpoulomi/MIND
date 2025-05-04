@@ -15,29 +15,48 @@ const Login = ({ setRefetch }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    if (!email || !password || (!isLogin && !confirmPassword)) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+  
     if (!isLogin) {
       // SIGN-UP FLOW
       if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
       }
-
+  
       try {
-        const res = await axios.post("http://localhost:5000/api/user/addUser", {
+        // Step 1: Signup
+        await axios.post("http://localhost:5000/api/user/addUser", {
           email,
           password,
           confirmPassword,
+          currentPassword: password,
         });
-
-        alert("Account created successfully!");
+  
+        // Step 2: Immediately log in
+        const loginRes = await axios.post("http://localhost:5000/api/user/login", {
+          email,
+          password,
+        });
+  
+        if (loginRes.data?.token) {
+          localStorage.setItem("session", email);
+          localStorage.setItem("token", loginRes.data.token);
+          setRefetch((prev) => !prev);
+          navigate("/");
+        } else {
+          alert("Signup succeeded but auto-login failed.");
+        }
       } catch (error) {
-        console.error("Signup Error:", error.response?.data || error.message);
+        console.error("Signup/Login Error:", error.response?.data || error.message);
         alert(
           error.response?.data?.message ||
-          "Something went wrong during sign-up."
+          "Something went wrong during sign-up/login."
         );
-        return;
       }
     } else {
       // LOGIN FLOW
@@ -46,12 +65,10 @@ const Login = ({ setRefetch }) => {
           email,
           password,
         });
-
+  
         if (res.data?.token) {
-          // Save token and user info in localStorage
           localStorage.setItem("session", email);
           localStorage.setItem("token", res.data.token);
-
           setRefetch((prev) => !prev);
           navigate("/");
         } else {
@@ -63,15 +80,11 @@ const Login = ({ setRefetch }) => {
           error.response?.data?.message ||
           "Invalid email or password. Please try again."
         );
-        return;
       }
     }
-
-    // Clear inputs after successful operation
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
   };
+  
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-white p-6 gap-8">
