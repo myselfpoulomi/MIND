@@ -1,51 +1,72 @@
-import { useState, useEffect } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Trash2 } from "lucide-react";
 
-const TodoList = () => {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("mindTodos");
-    return savedTodos
-      ? JSON.parse(savedTodos)
-      : [
-          { id: "1", text: "Drink water (at least 8 glasses)", completed: false },
-          { id: "2", text: "Take a 10-minute walk outside", completed: false },
-          { id: "3", text: "Practice deep breathing for 5 minutes", completed: false },
-          { id: "4", text: "Write 3 things you're grateful for", completed: false },
-        ];
-  });
+const API_BASE = "http://localhost:5000/api/tasks";
 
+const TodoList = () => {
+  const [todos, setTodos] = useState([]);
   const [newTodoText, setNewTodoText] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem("mindTodos", JSON.stringify(todos));
-  }, [todos]);
-
-  const handleAddTodo = () => {
-    if (newTodoText.trim()) {
-      const newTodo = {
-        id: Date.now().toString(),
-        text: newTodoText.trim(),
-        completed: false,
-      };
-      setTodos([...todos, newTodo]);
-      setNewTodoText("");
+  // Fetch from backend on mount
+  const fetchTodos = async () => {
+    try {
+      const res = await axios.get(API_BASE);
+      setTodos(res.data);
+    } catch (err) {
+      console.error("Error fetching todos:", err);
     }
   };
 
-  const toggleTodoComplete = (id) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  // Add new todo
+  const handleAddTodo = async () => {
+    if (!newTodoText.trim()) return;
+    try {
+      await axios.post(`${API_BASE}/createTask`, {
+        title: newTodoText.trim(),
+      });
+      setNewTodoText("");
+      fetchTodos();
+    } catch (err) {
+      console.error("Error adding todo:", err);
+    }
   };
 
-  const deleteTodo = (id) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
+  // Delete a todo
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`${API_BASE}/deleteTask/${id}`);
+      fetchTodos();
+    } catch (err) {
+      console.error("Error deleting todo:", err);
+    }
+  };
+
+  // Toggle completed and update backend
+  const toggleTodoComplete = async (id, currentState) => {
+    try {
+      await axios.put(`${API_BASE}/updateTask/${id}`, {
+        completed: !currentState,
+      });
+      fetchTodos();
+    } catch (err) {
+      console.error("Error updating todo completion:", err);
+    }
   };
 
   return (
@@ -60,36 +81,35 @@ const TodoList = () => {
         <div className="space-y-2">
           {todos.map((todo) => (
             <div
-              key={todo.id}
+              key={todo._id}
               className="flex items-center justify-between p-3 bg-white rounded-md border border-gray-100 shadow-sm"
             >
               <div className="flex items-center space-x-3">
                 <Checkbox
-                  id={`todo-${todo.id}`}
+                  id={`todo-${todo._id}`}
                   checked={todo.completed}
-                  onCheckedChange={() => toggleTodoComplete(todo.id)}
+                  onCheckedChange={() => toggleTodoComplete(todo._id, todo.completed)}
                   className="border-[#7E7EC9] data-[state=checked]:bg-[#7E7EC9]"
                 />
                 <label
-                  htmlFor={`todo-${todo.id}`}
+                  htmlFor={`todo-${todo._id}`}
                   className={`text-sm ${
                     todo.completed ? "line-through text-gray-400" : "text-gray-700"
                   }`}
                 >
-                  {todo.text}
+                  {todo.title}
                 </label>
               </div>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => deleteTodo(todo.id)}
+                onClick={() => deleteTodo(todo._id)}
                 className="text-gray-400 hover:text-red-500"
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
           ))}
-
           {todos.length === 0 && (
             <p className="text-center text-gray-500 py-4">
               No tasks yet. Add your first mental wellness task!
@@ -104,9 +124,7 @@ const TodoList = () => {
           placeholder="Add a new wellness task..."
           className="flex-1"
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              handleAddTodo();
-            }
+            if (e.key === "Enter") handleAddTodo();
           }}
         />
         <Button onClick={handleAddTodo} className="bg-[#7E7EC9] hover:bg-[#6a6aaf]">
