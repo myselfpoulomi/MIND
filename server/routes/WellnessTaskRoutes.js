@@ -1,3 +1,5 @@
+// routes/taskRoutes.js
+
 import express from 'express';
 import {
   getTasks,
@@ -8,18 +10,28 @@ import {
 
 const router = express.Router();
 
-// Temporary middleware to simulate authentication
+// 🔧 Updated middleware to extract userId from query, body, or headers
 const protect = (req, res, next) => {
-  // 👇 Use a valid ObjectId here!
-  req.user = { id: '6630e5f7f11f5ae8912c3456' }; // Replace with a real ObjectId from your DB
+  const userId =
+    (req.body && req.body.userId) ||
+    (req.query && req.query.userId) ||
+    req.headers['x-user-id'];
+
+  if (!userId) {
+    return res.status(401).json({ message: 'User ID missing from request.' });
+  }
+
+  req.user = { id: userId }; // Attach user info to req object
   next();
 };
 
 router.use(protect);
 
-router.get('/', getTasks);
-router.post('/createTask', createTask);             // Changed to RESTful endpoint
-router.put('/updateTask/:id', updateTask);           // Changed to RESTful endpoint
-router.delete('/deleteTask/:id', deleteTask);        // Changed to RESTful endpoint
+// Routes
+router.get('/', getTasks); // userId is expected in query/header/body
+ // now expects userId in query param
+router.post('/createTask', createTask);
+router.put('/updateTask/:id', updateTask);
+router.delete('/deleteTask/:id', deleteTask);
 
 export default router;

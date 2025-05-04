@@ -19,10 +19,14 @@ const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [newTodoText, setNewTodoText] = useState("");
 
-  // Fetch from backend on mount
+  const userId = localStorage.getItem("session");
+
   const fetchTodos = async () => {
+    if (!userId) return console.error("User ID not found in sessionStorage.");
     try {
-      const res = await axios.get(API_BASE);
+      const res = await axios.get(`${API_BASE}`, {
+        params: { userId },
+      });
       setTodos(res.data);
     } catch (err) {
       console.error("Error fetching todos:", err);
@@ -31,14 +35,16 @@ const TodoList = () => {
 
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, [userId]);
 
-  // Add new todo
   const handleAddTodo = async () => {
-    if (!newTodoText.trim()) return;
+    if (!newTodoText.trim() || !userId) return;
+    console.log("-------------", userId);
+
     try {
       await axios.post(`${API_BASE}/createTask`, {
         title: newTodoText.trim(),
+        userId,
       });
       setNewTodoText("");
       fetchTodos();
@@ -47,27 +53,36 @@ const TodoList = () => {
     }
   };
 
-  // Delete a todo
   const deleteTodo = async (id) => {
     try {
-      await axios.delete(`${API_BASE}/deleteTask/${id}`);
+      await axios.delete(`${API_BASE}/deleteTask/${id}`, {
+        data: { userId },
+      });
       fetchTodos();
     } catch (err) {
       console.error("Error deleting todo:", err);
     }
   };
 
-  // Toggle completed and update backend
   const toggleTodoComplete = async (id, currentState) => {
     try {
       await axios.put(`${API_BASE}/updateTask/${id}`, {
         completed: !currentState,
+        userId,
       });
       fetchTodos();
     } catch (err) {
       console.error("Error updating todo completion:", err);
     }
   };
+
+  if (!userId) {
+    return (
+      <div className="text-center text-red-500 p-4">
+        No user session found. Please log in.
+      </div>
+    );
+  }
 
   return (
     <Card>
@@ -88,13 +103,17 @@ const TodoList = () => {
                 <Checkbox
                   id={`todo-${todo._id}`}
                   checked={todo.completed}
-                  onCheckedChange={() => toggleTodoComplete(todo._id, todo.completed)}
+                  onCheckedChange={() =>
+                    toggleTodoComplete(todo._id, todo.completed)
+                  }
                   className="border-[#7E7EC9] data-[state=checked]:bg-[#7E7EC9]"
                 />
                 <label
                   htmlFor={`todo-${todo._id}`}
                   className={`text-sm ${
-                    todo.completed ? "line-through text-gray-400" : "text-gray-700"
+                    todo.completed
+                      ? "line-through text-gray-400"
+                      : "text-gray-700"
                   }`}
                 >
                   {todo.title}
@@ -127,7 +146,10 @@ const TodoList = () => {
             if (e.key === "Enter") handleAddTodo();
           }}
         />
-        <Button onClick={handleAddTodo} className="bg-[#7E7EC9] hover:bg-[#6a6aaf]">
+        <Button
+          onClick={handleAddTodo}
+          className="bg-[#7E7EC9] hover:bg-[#6a6aaf]"
+        >
           <Plus className="h-4 w-4 mr-1" /> Add
         </Button>
       </CardFooter>
