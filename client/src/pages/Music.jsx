@@ -158,7 +158,7 @@ const Music = ({session,setRefetch}) => {
           )}
           
           {/* Categories */}
-          <section className="mb-8">
+          {/* <section className="mb-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Categories</h2>
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
@@ -171,7 +171,7 @@ const Music = ({session,setRefetch}) => {
                 </Button>
               ))}
             </div>
-          </section>
+          </section> */}
           
           {/* Playlists Section */}
           <section className="mb-12">
