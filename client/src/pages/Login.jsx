@@ -1,23 +1,76 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate, Link } from "react-router-dom";
 import { HeartHandshake } from "lucide-react";
 
-const Login = ({setRefetch}) => {
+const Login = ({ setRefetch }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const session = email;
-    localStorage.setItem("session", session);
-    setRefetch((prev)=>!prev)
-    navigate("/");
+
+    if (!isLogin) {
+      // SIGN-UP FLOW
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      try {
+        const res = await axios.post("http://localhost:5000/api/user/addUser", {
+          email,
+          password,
+          confirmPassword,
+        });
+
+        alert("Account created successfully!");
+      } catch (error) {
+        console.error("Signup Error:", error.response?.data || error.message);
+        alert(
+          error.response?.data?.message ||
+          "Something went wrong during sign-up."
+        );
+        return;
+      }
+    } else {
+      // LOGIN FLOW
+      try {
+        const res = await axios.post("http://localhost:5000/api/user/login", {
+          email,
+          password,
+        });
+
+        if (res.data?.token) {
+          // Save token and user info in localStorage
+          localStorage.setItem("session", email);
+          localStorage.setItem("token", res.data.token);
+
+          setRefetch((prev) => !prev);
+          navigate("/");
+        } else {
+          alert("Login failed. Invalid response from server.");
+        }
+      } catch (error) {
+        console.error("Login Error:", error.response?.data || error.message);
+        alert(
+          error.response?.data?.message ||
+          "Invalid email or password. Please try again."
+        );
+        return;
+      }
+    }
+
+    // Clear inputs after successful operation
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
@@ -77,9 +130,7 @@ const Login = ({setRefetch}) => {
               {isLogin ? "Login" : "Sign Up"}
             </Button>
             <p className="text-center text-sm text-gray-600">
-              {isLogin
-                ? "Don't have an account? "
-                : "Already have an account? "}
+              {isLogin ? "Don't have an account? " : "Already have an account? "}
               <button
                 type="button"
                 onClick={() => setIsLogin(!isLogin)}
