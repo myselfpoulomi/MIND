@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { useNavigate, Link } from "react-router-dom";
 import { HeartHandshake } from "lucide-react";
 
@@ -15,19 +20,19 @@ const Login = ({ setRefetch }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!email || !password || (!isLogin && !confirmPassword)) {
       alert("Please fill in all required fields.");
       return;
     }
-  
+
     if (!isLogin) {
       // SIGN-UP FLOW
       if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
       }
-  
+
       try {
         // Step 1: Signup
         await axios.post("http://localhost:5000/api/user/addUser", {
@@ -36,15 +41,15 @@ const Login = ({ setRefetch }) => {
           confirmPassword,
           currentPassword: password,
         });
-  
+
         // Step 2: Immediately log in
         const loginRes = await axios.post("http://localhost:5000/api/user/login", {
           email,
           password,
         });
-  
-        if (loginRes.data?.token) {
-          localStorage.setItem("session", email);
+
+        if (loginRes.data?.token && loginRes.data?.userId) {
+          localStorage.setItem("session", loginRes.data.userId);
           localStorage.setItem("token", loginRes.data.token);
           setRefetch((prev) => !prev);
           navigate("/");
@@ -65,9 +70,9 @@ const Login = ({ setRefetch }) => {
           email,
           password,
         });
-  
-        if (res.data?.token) {
-          localStorage.setItem("session", email);
+
+        if (res.data?.token && res.data?.userId) {
+          localStorage.setItem("session", res.data.userId);
           localStorage.setItem("token", res.data.token);
           setRefetch((prev) => !prev);
           navigate("/");
@@ -83,8 +88,6 @@ const Login = ({ setRefetch }) => {
       }
     }
   };
-  
-  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-white p-6 gap-8">
