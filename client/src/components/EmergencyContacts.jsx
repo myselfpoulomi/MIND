@@ -1,47 +1,31 @@
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Phone, MessageSquare } from "lucide-react";
-
-const emergencyContacts = [
-  {
-    name: "National Mental Health Helpline",
-    description: "24/7 crisis support and suicide prevention services",
-    phoneNumber: "1800-599-0019",
-    chatUrl: "#",
-    hours: "24 hours, everyday",
-  },
-  {
-    name: "AASRA",
-    description: "For individuals in emotional distress or suicidal crisis",
-    phoneNumber: "91-9820466726",
-    hours: "24 hours, everyday",
-  },
-  {
-    name: "Vandrevala Foundation",
-    description: "Mental health support and crisis intervention",
-    phoneNumber: "9999666555",
-    chatUrl: "#",
-    hours: "24 hours, everyday",
-  },
-  {
-    name: "Connecting Trust",
-    description: "Emotional support helpline",
-    phoneNumber: "9922001122",
-    hours: "12pm to 8pm, everyday",
-  },
-  {
-    name: "iCALL",
-    description: "Psychosocial helpline for emotional and mental health concerns",
-    phoneNumber: "022-25521111",
-    chatUrl: "#",
-    hours: "8am to 10pm, Mon-Sat",
-  },
-];
+import { Phone, Mail, Globe } from "lucide-react";
 
 const EmergencyContacts = () => {
+  const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const handleCallNumber = (phoneNumber) => {
     window.location.href = `tel:${phoneNumber}`;
   };
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/resources");
+        const data = await res.json();
+        setContacts(data);
+      } catch (error) {
+        console.error("Failed to fetch emergency contacts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContacts();
+  }, []);
 
   return (
     <div className="space-y-4">
@@ -67,38 +51,53 @@ const EmergencyContacts = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {emergencyContacts.map((contact, index) => (
-          <Card key={index}>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xl">{contact.name}</CardTitle>
-              <CardDescription>{contact.description}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center text-sm text-gray-600">
-                  <span className="font-medium">Hours:</span>
-                  <span className="ml-2">{contact.hours}</span>
-                </div>
+      {loading ? (
+        <p className="text-gray-600">Loading emergency contacts...</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {contacts.map((contact, index) => (
+            <Card key={index}>
+              <CardHeader className="pb-2">
+                <CardTitle className="text-xl">{contact.title}</CardTitle>
+                <CardDescription>{contact.description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 text-sm text-gray-700">
+                  {contact.hours && (
+                    <div>
+                      <span className="font-medium">Hours:</span> {contact.hours}
+                    </div>
+                  )}
 
-                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                  <Button onClick={() => handleCallNumber(contact.phoneNumber)} className="bg-[#9B87F5] hover:bg-[#7364b9]">
-                    <Phone className="h-4 w-4 mr-2" /> {contact.phoneNumber}
-                  </Button>
-
-                  {contact.chatUrl && (
-                    <Button variant="outline" asChild>
-                      <a href={contact.chatUrl}>
-                        <MessageSquare className="h-4 w-4 mr-2" /> Chat
+                  {contact.contact_info?.email && (
+                    <div className="flex items-center">
+                      <Mail className="h-4 w-4 mr-2 text-gray-600" />
+                      <a href={`mailto:${contact.contact_info.email}`} className="hover:underline">
+                        {contact.contact_info.email}
                       </a>
+                    </div>
+                  )}
+
+                  {contact.contact_info?.website && (
+                    <div className="flex items-center">
+                      <Globe className="h-4 w-4 mr-2 text-gray-600" />
+                      <a href={contact.contact_info.website} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        {contact.contact_info.website}
+                      </a>
+                    </div>
+                  )}
+
+                  {contact.contact_info?.phone && (
+                    <Button onClick={() => handleCallNumber(contact.contact_info.phone)} className="bg-[#9B87F5] hover:bg-[#7364b9]">
+                      <Phone className="h-4 w-4 mr-2" /> {contact.contact_info.phone}
                     </Button>
                   )}
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

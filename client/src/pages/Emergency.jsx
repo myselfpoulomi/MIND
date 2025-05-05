@@ -21,7 +21,7 @@ const Emergency = ({session,setRefetch}) => {
           <EmergencyContacts />
           
           {/* Crisis Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 mt-9">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">Recognizing a Mental Health Crisis</h2>
               <p className="text-gray-600 mb-4">
