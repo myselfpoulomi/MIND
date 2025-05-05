@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -20,40 +20,25 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calendar as CalendarIcon, Clock } from "lucide-react";
 
-const doctors = [
-  {
-    id: "dr-emily-chen",
-    name: "Dr. Emily Chen",
-    specialty: "Clinical Psychologist",
-    imageUrl:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop",
-    availability: ["09:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"],
-  },
-  {
-    id: "dr-marcus-patel",
-    name: "Dr. Marcus Patel",
-    specialty: "Psychiatrist",
-    imageUrl:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=200&auto=format&fit=crop",
-    availability: ["10:00 AM", "12:00 PM", "03:00 PM", "05:00 PM"],
-  },
-  {
-    id: "dr-sarah-johnson",
-    name: "Dr. Sarah Johnson",
-    specialty: "Therapist",
-    imageUrl:
-      "https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=200&auto=format&fit=crop",
-    availability: ["08:00 AM", "10:00 AM", "01:00 PM", "03:00 PM"],
-  },
-];
-
 const AppointmentScheduler = ({ onSchedule }) => {
+  const [doctors, setDoctors] = useState([]);
   const [selectedDate, setSelectedDate] = useState();
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
+
+  // 🔄 Fetch doctors from the API
+  useEffect(() => {
+    fetch("http://localhost:5000/api/professionals/")
+      .then((res) => res.json())
+      .then((data) => setDoctors(data))
+      .catch((err) => {
+        console.error("Failed to load doctors:", err);
+        alert("Unable to fetch professionals from server.");
+      });
+  }, []);
 
   const handleSchedule = () => {
     if (!selectedDate || !selectedDoctor || !selectedTime || !name || !email) {
@@ -70,11 +55,9 @@ const AppointmentScheduler = ({ onSchedule }) => {
       notes,
     };
 
-    onSchedule(appointmentData); // ⬅️ Add to list
-
+    onSchedule(appointmentData);
     alert("Appointment scheduled!");
 
-    // Reset fields
     setSelectedDate(undefined);
     setSelectedDoctor("");
     setSelectedTime("");
@@ -105,7 +88,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
               <SelectContent>
                 {doctors.map((doctor) => (
                   <SelectItem key={doctor.id} value={doctor.id}>
-                    {doctor.name} - {doctor.specialty}
+                    {doctor.name} - {doctor.specialization}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -116,7 +99,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-full overflow-hidden">
                 <img
-                  src={getSelectedDoctor()?.imageUrl}
+                  src={getSelectedDoctor()?.photo_url}
                   alt={getSelectedDoctor()?.name}
                   className="w-full h-full object-cover"
                 />
@@ -124,7 +107,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
               <div>
                 <p className="font-medium">{getSelectedDoctor()?.name}</p>
                 <p className="text-sm text-gray-500">
-                  {getSelectedDoctor()?.specialty}
+                  {getSelectedDoctor()?.specialization}
                 </p>
               </div>
             </div>
@@ -141,9 +124,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
             onSelect={setSelectedDate}
             className="border rounded-md p-3"
             disabled={(date) =>
-              date < new Date() ||
-              date.getDay() === 0 ||
-              date.getDay() === 6
+              date < new Date() || date.getDay() === 0 || date.getDay() === 6
             }
           />
         </div>
@@ -154,19 +135,28 @@ const AppointmentScheduler = ({ onSchedule }) => {
               <Clock className="h-4 w-4 mr-2" /> Select a Time
             </Label>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-              {getSelectedDoctor()?.availability.map((time) => (
-                <Button
-                  key={time}
-                  type="button"
-                  variant={selectedTime === time ? "default" : "outline"}
-                  onClick={() => setSelectedTime(time)}
-                  className={
-                    selectedTime === time ? "bg-[#7F76C4] hover:bg-[#7F76C4]" : ""
-                  }
-                >
-                  {time}
-                </Button>
-              ))}
+              {getSelectedDoctor()?.available_slots.map((slot) => {
+                const date = new Date(slot);
+                const timeString = date.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                });
+                return (
+                  <Button
+                    key={slot}
+                    type="button"
+                    variant={selectedTime === timeString ? "default" : "outline"}
+                    onClick={() => setSelectedTime(timeString)}
+                    className={
+                      selectedTime === timeString
+                        ? "bg-[#7F76C4] hover:bg-[#7F76C4]"
+                        : ""
+                    }
+                  >
+                    {timeString}
+                  </Button>
+                );
+              })}
             </div>
           </div>
         )}
