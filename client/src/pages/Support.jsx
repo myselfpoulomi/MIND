@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchHelpData } from "@/services/helpApi";
+
 import axios from "axios";
 
 import Navbar from "@/components/Navbar";
@@ -31,9 +31,10 @@ const Support = ({ session, setRefetch }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetchHelpData()
+    axios
+      .get("http://localhost:5000/api/help") // replace with your real endpoint
       .then((res) => {
-        setHelpData(res.data[0]); // Assuming one document
+        setHelpData(res.data[0]); // or just res.data if not an array
         setLoadingResources(false);
       })
       .catch((err) => {
@@ -42,6 +43,7 @@ const Support = ({ session, setRefetch }) => {
         setLoadingResources(false);
       });
   }, []);
+  
 
   const [messages, setMessages] = useState([
     {

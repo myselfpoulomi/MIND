@@ -47,7 +47,7 @@ const doctors = [
   },
 ];
 
-const AppointmentScheduler = () => {
+const AppointmentScheduler = ({ onSchedule }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [selectedDoctor, setSelectedDoctor] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
@@ -61,37 +61,35 @@ const AppointmentScheduler = () => {
       return;
     }
 
+    const doctor = doctors.find((doc) => doc.id === selectedDoctor);
+
     const appointmentData = {
-      date: selectedDate,
-      doctorId: selectedDoctor,
+      date: selectedDate.toLocaleDateString(),
       time: selectedTime,
-      name,
-      email,
+      provider: doctor.name,
       notes,
     };
 
-    console.log("Appointment scheduled:", appointmentData);
+    onSchedule(appointmentData); // ⬅️ Add to list
 
-    alert(
-      "Your appointment has been scheduled. Please check your email for confirmation."
-    );
+    alert("Appointment scheduled!");
 
+    // Reset fields
     setSelectedDate(undefined);
     setSelectedDoctor("");
     setSelectedTime("");
+    setName("");
+    setEmail("");
     setNotes("");
   };
 
-  const getSelectedDoctor = () => {
-    return doctors.find((doctor) => doctor.id === selectedDoctor);
-  };
+  const getSelectedDoctor = () =>
+    doctors.find((doctor) => doctor.id === selectedDoctor);
 
   return (
     <Card className="w-full max-w-3xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-[#7F76C4]">
-          Schedule an Appointment
-        </CardTitle>
+        <CardTitle className="text-[#7F76C4]">Schedule an Appointment</CardTitle>
         <CardDescription>
           Book a video consultation with a mental health professional
         </CardDescription>
@@ -163,9 +161,7 @@ const AppointmentScheduler = () => {
                   variant={selectedTime === time ? "default" : "outline"}
                   onClick={() => setSelectedTime(time)}
                   className={
-                    selectedTime === time
-                      ? "bg-[#7F76C4] hover:bg-[#7F76C4]"
-                      : ""
+                    selectedTime === time ? "bg-[#7F76C4] hover:bg-[#7F76C4]" : ""
                   }
                 >
                   {time}
