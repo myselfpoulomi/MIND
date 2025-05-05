@@ -12,7 +12,7 @@ import professionalRoutes from './routes/ProfessionalRoutes.js'
 import chatSupportRoutes from './routes/ChatSupportRoutes.js'
 import emergencyResourceRoutes from './routes/EmergencyResourceRoutes.js'
 import subscriptionPlanRoutes from './routes/SubscriptionPlanRoutes.js'
-
+import helpRoutes from './routes/HelpRoutes.js'
 
 dotenv.config();
 
@@ -39,6 +39,7 @@ app.use("/api/user", UserRoutes); // User routes
 app.use("/api/moodlogs", MoodRoutes); // Added MoodLog routes
 app.use('/api/sessions', MeditationYogaSessionRoutes); 
 app.use('/api/songs', songRoutes);
+app.use('/api/help' , helpRoutes)
 app.use('/api/tasks', WellnessTaskRoutes);
 app.use('/api/professionals', professionalRoutes);
 app.use('/api/chat', chatSupportRoutes);
