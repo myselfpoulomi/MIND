@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import axios from "axios";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const moods = [
@@ -20,11 +28,31 @@ const MoodTracker = () => {
     setSelectedMood(mood);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedMood) {
-      console.log("Mood logged:", selectedMood);
-      alert(`Mood logged: ${selectedMood.name}`);
-      setSelectedMood(null);
+      const rawUserId = localStorage.getItem("session") || sessionStorage.getItem("session");
+
+      if (!rawUserId) {
+        alert("User ID not found in storage.");
+        return;
+      }
+
+      const moodLog = {
+        user_id: rawUserId,
+        mood: selectedMood.name.toLowerCase(),
+        timestamp: new Date().toISOString(),
+      };
+
+      try {
+        const response = await axios.post("http://localhost:5000/api/moodlogs/addMood", moodLog);
+
+        console.log("Mood logged:", response.data);
+        alert(`Mood logged: ${selectedMood.name} for user ${rawUserId}`);
+        setSelectedMood(null);
+      } catch (error) {
+        console.error("Error logging mood:", error.response?.data || error.message);
+        alert("Failed to log mood. Please try again later.");
+      }
     }
   };
 
@@ -32,7 +60,9 @@ const MoodTracker = () => {
     <Card>
       <CardHeader>
         <CardTitle className="text-[#7E69AB]">How are you feeling today?</CardTitle>
-        <CardDescription>Track your mood to gain insights into your emotional patterns</CardDescription>
+        <CardDescription>
+          Track your mood to gain insights into your emotional patterns
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-4 gap-3">
@@ -53,8 +83,8 @@ const MoodTracker = () => {
         </div>
       </CardContent>
       <CardFooter>
-        <Button 
-          onClick={handleSubmit} 
+        <Button
+          onClick={handleSubmit}
           disabled={!selectedMood}
           className="w-full bg-[#7E69AB] hover:bg-mind-purple-dark"
         >

@@ -1,21 +1,26 @@
 import MoodLog from '../models/moodLogSchema.js';
 
 // Create a new mood log
- const createMoodLog = async (req, res) => {
-    try {
-        const { user_id, mood } = req.body;
-
-        const newMoodLog = new MoodLog({
-            user_id,
-            mood
-        });
-
-        await newMoodLog.save();
-        res.status(201).json(newMoodLog);
-    } catch (error) {
-        res.status(500).json({ message: 'Error creating mood log', error: error.message });
+const createMoodLog = async (req, res) => {
+    const { user_id, mood, timestamp } = req.body;
+  
+    if (!user_id || !mood || !timestamp) {
+      return res.status(400).json({ error: "Missing required fields" });
     }
-};
+  
+    try {
+      // Save to DB
+      const newMood = new MoodLog({ user_id, mood, timestamp });
+      await newMood.save();
+  
+      console.log("Mood saved:", newMood);
+      res.status(200).json({ message: "Mood saved successfully" });
+    } catch (err) {
+      console.error("Server error:", err);
+      res.status(500).json({ error: "Failed to save mood" });
+    }
+  };
+  
 
 // Get all mood logs for a user
  const getMoodLogs = async (req, res) => {
