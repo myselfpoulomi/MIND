@@ -129,6 +129,7 @@ const onSubmit = async (event) => {
     console.log("Form Data Object:", object);
     console.log("JSON Payload:", json);
 
+   
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: {
