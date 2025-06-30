@@ -31,20 +31,19 @@ const Meditation = ({ session, setRefetch }) => {
     const match = url.match(/(?:\?v=|\/embed\/|\.be\/)([a-zA-Z0-9_-]{11})/);
     return match ? match[1] : null;
   };
-  
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar session={session} setRefetch={setRefetch} />
-      
+
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Hero Section */}
           <section className="mb-12">
             <div className="relative rounded-xl overflow-hidden h-64 md:h-80">
-              <img 
-                src="https://images.unsplash.com/photo-1545389336-cf090694435e?q=80&w=1600&auto=format&fit=crop" 
-                alt="Meditation and yoga" 
+              <img
+                src="https://images.unsplash.com/photo-1545389336-cf090694435e?q=80&w=1600&auto=format&fit=crop"
+                alt="Meditation and yoga"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-r from-[#827EBD] to-transparent flex items-center">
@@ -66,9 +65,9 @@ const Meditation = ({ session, setRefetch }) => {
               <h2 className="text-2xl font-bold text-gray-900">Explore Sessions</h2>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <Input 
-                  placeholder="Search meditations..." 
-                  className="pl-10 w-full md:w-64" 
+                <Input
+                  placeholder="Search meditations..."
+                  className="pl-10 w-full md:w-64"
                 />
               </div>
             </div>
@@ -77,73 +76,87 @@ const Meditation = ({ session, setRefetch }) => {
               <TabsList className="mb-6">
                 <TabsTrigger value="meditation">Meditation</TabsTrigger>
                 <TabsTrigger value="yoga">Yoga</TabsTrigger>
-                {/* <TabsTrigger value="favorites">Favorites</TabsTrigger> */}
               </TabsList>
 
+              {/* Meditation Tab */}
               <TabsContent value="meditation">
                 {loading ? (
                   <p>Loading...</p>
-                ) : (
+                ) : filteredSessions("meditation").length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredSessions("meditation").map((session) => (
-                    <MeditationCard 
-                    key={session.id}
-                    title={session.title}
-                    description={session.description}
-                    duration={`${session.duration_minutes} min`}
-                    category={session.category[0] || "General"}
-                    imageUrl={session.thumbnail_url}
-                    videoId={extractYouTubeId(session.media_url)}
-                  />
-                  
+                      <MeditationCard
+                        key={session._id}
+                        title={session.title}
+                        description={session.description}
+                        duration={`${session.duration_minutes} min`}
+                        category={session.category[0] || "General"}
+                        imageUrl={session.thumbnail_url}
+                        videoId={extractYouTubeId(session.media_url)}
+                      />
                     ))}
                   </div>
+                ) : (
+                  <p className="text-gray-500">No meditation sessions available.</p>
                 )}
               </TabsContent>
 
+              {/* Yoga Tab */}
               <TabsContent value="yoga">
                 {loading ? (
                   <p>Loading...</p>
-                ) : (
+                ) : filteredSessions("yoga").length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredSessions("yoga").map((session) => (
-                     <MeditationCard 
-                     key={session.id}
-                     title={session.title}
-                     description={session.description}
-                     duration={`${session.duration_minutes} min`}
-                     category={session.category[0] || "General"}
-                     imageUrl={session.thumbnail_url}
-                     videoId={extractYouTubeId(session.media_url)}
-                   />
-                   
+                      <MeditationCard
+                        key={session._id}
+                        title={session.title}
+                        description={session.description}
+                        duration={`${session.duration_minutes} min`}
+                        category={session.category[0] || "General"}
+                        imageUrl={session.thumbnail_url}
+                        videoId={extractYouTubeId(session.media_url)}
+                      />
                     ))}
                   </div>
+                ) : (
+                  <p className="text-gray-500">No yoga sessions available.</p>
                 )}
               </TabsContent>
-
-              {/* <TabsContent value="favorites">
-                <div className="text-center py-12">
-                  <p className="text-gray-500">You haven't saved any favorites yet.</p>
-                </div>
-              </TabsContent> */}
             </Tabs>
 
             {/* Tips Section */}
             <div className="bg-[#b9b3f196] rounded-lg p-6 mb-12">
-              <h2 className="text-xl font-semibold text-mind-purple-dark mb-4">Meditation Tips for Beginners</h2>
+              <h2 className="text-xl font-semibold text-mind-purple-dark mb-4">
+                Meditation Tips for Beginners
+              </h2>
               <ul className="space-y-2 text-gray-700">
-                <li className="flex items-start"><span className="text-mind-purple mr-2">•</span><span>Start with just 5 minutes per day and gradually increase</span></li>
-                <li className="flex items-start"><span className="text-mind-purple mr-2">•</span><span>Find a quiet space where you won't be disturbed</span></li>
-                <li className="flex items-start"><span className="text-mind-purple mr-2">•</span><span>Don't worry about "doing it right" - meditation is a practice</span></li>
-                <li className="flex items-start"><span className="text-mind-purple mr-2">•</span><span>Try different styles to find what works best for you</span></li>
-                <li className="flex items-start"><span className="text-mind-purple mr-2">•</span><span>Consistency is more important than duration</span></li>
+                <li className="flex items-start">
+                  <span className="text-mind-purple mr-2">•</span>
+                  <span>Start with just 5 minutes per day and gradually increase</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-mind-purple mr-2">•</span>
+                  <span>Find a quiet space where you won't be disturbed</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-mind-purple mr-2">•</span>
+                  <span>Don't worry about "doing it right" - meditation is a practice</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-mind-purple mr-2">•</span>
+                  <span>Try different styles to find what works best for you</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-mind-purple mr-2">•</span>
+                  <span>Consistency is more important than duration</span>
+                </li>
               </ul>
             </div>
           </section>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

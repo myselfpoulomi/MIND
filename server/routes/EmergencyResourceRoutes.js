@@ -9,7 +9,9 @@ import {
 
 const router = express.Router();
 
-// Routes
+// Routes 
+
+
 router.get('/', getAllResources);
 router.get('/:id', getResourceById);
 router.post('/createResource', createResource);
