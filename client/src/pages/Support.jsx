@@ -4,7 +4,14 @@ import axios from "axios";
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -17,11 +24,23 @@ import EmergencyContacts from "@/components/EmergencyContacts";
 
 const supportTopics = [
   { id: "anxiety", label: "Anxiety", color: "bg-blue-100 text-blue-800" },
-  { id: "depression", label: "Depression", color: "bg-purple-100 text-purple-800" },
+  {
+    id: "depression",
+    label: "Depression",
+    color: "bg-purple-100 text-purple-800",
+  },
   { id: "stress", label: "Stress", color: "bg-orange-100 text-orange-800" },
   { id: "sleep", label: "Sleep", color: "bg-indigo-100 text-indigo-800" },
-  { id: "relationships", label: "Relationships", color: "bg-pink-100 text-pink-800" },
-  { id: "self-esteem", label: "Self-Esteem", color: "bg-green-100 text-green-800" },
+  {
+    id: "relationships",
+    label: "Relationships",
+    color: "bg-pink-100 text-pink-800",
+  },
+  {
+    id: "self-esteem",
+    label: "Self-Esteem",
+    color: "bg-green-100 text-green-800",
+  },
 ];
 
 const Support = ({ session, setRefetch }) => {
@@ -29,6 +48,7 @@ const Support = ({ session, setRefetch }) => {
   const [helpData, setHelpData] = useState(null);
   const [loadingResources, setLoadingResources] = useState(true);
   const [error, setError] = useState(null);
+  //  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios
@@ -43,12 +63,12 @@ const Support = ({ session, setRefetch }) => {
         setLoadingResources(false);
       });
   }, []);
-  
 
   const [messages, setMessages] = useState([
     {
       id: "1",
-      content: "Hello! I'm your mental health assistant. How can I help you today?",
+      content:
+        "Hello! I'm your mental health assistant. How can I help you today?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -87,13 +107,62 @@ const Support = ({ session, setRefetch }) => {
     }, 1000);
   };
 
+const onSubmit = async (event) => {
+  event.preventDefault();
+  console.log("Form submission started...");
+
+  const formData = new FormData(event.target);
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const message = formData.get("message"); // fixed typo
+
+  if (!name || !email || !message) {
+    toast.warning("Please fill in all fields before submitting!");
+    return;
+  }
+
+  try {
+    formData.append("access_key", "92fce03e-acbd-460b-818a-cd77b3220f91");
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    console.log("Form Data Object:", object);
+    console.log("JSON Payload:", json);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: json,
+    });
+
+    const res = await response.json();
+    console.log("API Response:", res);
+
+    if (res.success) {
+      // toast.success("Email submitted successfully!");
+      event.target.reset();
+    } else {
+      // toast.error("Form submission failed. Please try again!");
+    }
+  } catch (error) {
+    console.error("Error during form submission:", error);
+    // toast.error("Something went wrong. Please try again later!");
+  }
+};
+
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar session={session} setRefetch={setRefetch} />
 
       <main className="flex-grow pt-24 pb-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-6">Support & Resources</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-6">
+            Support & Resources
+          </h1>
 
           <Tabs defaultValue="chat">
             <TabsList className="mb-6">
@@ -108,24 +177,50 @@ const Support = ({ session, setRefetch }) => {
                   <Card className="h-[600px] flex flex-col">
                     <CardHeader>
                       <CardTitle className="text-xl">Chat Support</CardTitle>
-                      <CardDescription>Talk to our mental health assistant for guidance</CardDescription>
+                      <CardDescription>
+                        Talk to our mental health assistant for guidance
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="flex-grow overflow-y-auto space-y-4">
                       {messages.map((message) => (
-                        <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
-                          <div className={`max-w-[80%] p-3 rounded-lg ${message.sender === "user" ? "bg-[#9B87F5] text-white" : "bg-gray-100 text-gray-800"}`}>
+                        <div
+                          key={message.id}
+                          className={`flex ${
+                            message.sender === "user"
+                              ? "justify-end"
+                              : "justify-start"
+                          }`}
+                        >
+                          <div
+                            className={`max-w-[80%] p-3 rounded-lg ${
+                              message.sender === "user"
+                                ? "bg-[#9B87F5] text-white"
+                                : "bg-gray-100 text-gray-800"
+                            }`}
+                          >
                             {message.sender === "bot" && (
                               <div className="flex items-center mb-1">
                                 <Avatar className="h-6 w-6 mr-2">
                                   <AvatarImage src="https://images.unsplash.com/photo-1623934199716-dc28818a6ec7?q=80&w=100&auto=format&fit=crop" />
                                   <AvatarFallback>MA</AvatarFallback>
                                 </Avatar>
-                                <span className="text-xs font-medium">Mental Health Assistant</span>
+                                <span className="text-xs font-medium">
+                                  Mental Health Assistant
+                                </span>
                               </div>
                             )}
                             <p>{message.content}</p>
-                            <div className={`text-xs mt-1 ${message.sender === "user" ? "text-white/70" : "text-gray-500"}`}>
-                              {message.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                            <div
+                              className={`text-xs mt-1 ${
+                                message.sender === "user"
+                                  ? "text-white/70"
+                                  : "text-gray-500"
+                              }`}
+                            >
+                              {message.timestamp.toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
                             </div>
                           </div>
                         </div>
@@ -141,7 +236,10 @@ const Support = ({ session, setRefetch }) => {
                             if (e.key === "Enter") handleSendMessage();
                           }}
                         />
-                        <Button onClick={handleSendMessage} className="bg-[#9B87F5] hover:bg-[#7e6dca]">
+                        <Button
+                          onClick={handleSendMessage}
+                          className="bg-[#9B87F5] hover:bg-[#7e6dca]"
+                        >
                           <Send className="h-4 w-4" />
                         </Button>
                       </div>
@@ -153,12 +251,18 @@ const Support = ({ session, setRefetch }) => {
                   <Card>
                     <CardHeader>
                       <CardTitle className="text-xl">Common Topics</CardTitle>
-                      <CardDescription>Select a topic to get targeted support</CardDescription>
+                      <CardDescription>
+                        Select a topic to get targeted support
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-2">
                         {supportTopics.map((topic) => (
-                          <Badge key={topic.id} className={`cursor-pointer ${topic.color}`} variant="outline">
+                          <Badge
+                            key={topic.id}
+                            className={`cursor-pointer ${topic.color}`}
+                            variant="outline"
+                          >
                             {topic.label}
                           </Badge>
                         ))}
@@ -169,16 +273,25 @@ const Support = ({ session, setRefetch }) => {
                   <Card>
                     <CardHeader>
                       <CardTitle className="text-xl">Need More Help?</CardTitle>
-                      <CardDescription>Connect with professional support</CardDescription>
+                      <CardDescription>
+                        Connect with professional support
+                      </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <Button asChild className="w-full flex items-center justify-center gap-2 bg-[#9B87F5] hover:bg-[#7868be]">
+                      <Button
+                        asChild
+                        className="w-full flex items-center justify-center gap-2 bg-[#9B87F5] hover:bg-[#7868be]"
+                      >
                         <Link to="/appointments">
                           <Calendar className="h-4 w-4" />
                           Schedule an Appointment
                         </Link>
                       </Button>
-                      <Button asChild variant="outline" className="w-full flex items-center justify-center gap-2">
+                      <Button
+                        asChild
+                        variant="outline"
+                        className="w-full flex items-center justify-center gap-2"
+                      >
                         <Link to="/emergency">
                           <Phone className="h-4 w-4" />
                           Emergency Contacts
@@ -186,20 +299,43 @@ const Support = ({ session, setRefetch }) => {
                       </Button>
                     </CardContent>
                   </Card>
+<Card>
+  <CardHeader>
+    <CardTitle className="text-xl">Contact Us</CardTitle>
+    <CardDescription>
+      Send us your questions or feedback
+    </CardDescription>
+  </CardHeader>
+  <CardContent>
+    <form className="space-y-4" onSubmit={onSubmit}>
+      <Input
+        name="name"
+        placeholder="Your name"
+        type="text"
+        required
+      />
+      <Input
+        name="email"
+        placeholder="Your email"
+        type="email"
+        required
+      />
+      <Textarea
+        name="message"
+        placeholder="Your message..."
+        className="resize-none min-h-[100px]"
+        required
+      />
+      <Button
+        type="submit"
+        className="w-full bg-[#9B87F5] hover:bg-[#6c5eac]"
+      >
+        Send
+      </Button>
+    </form>
+  </CardContent>
+</Card>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-xl">Contact Us</CardTitle>
-                      <CardDescription>Send us your questions or feedback</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form className="space-y-4">
-                        <Input placeholder="Your email" type="email" />
-                        <Textarea placeholder="Your message..." className="resize-none min-h-[100px]" />
-                        <Button className="w-full bg-[#9B87F5] hover:bg-[#6c5eac]">Send Message</Button>
-                      </form>
-                    </CardContent>
-                  </Card>
                 </div>
               </div>
             </TabsContent>
@@ -208,8 +344,12 @@ const Support = ({ session, setRefetch }) => {
               <div className="max-w-4xl mx-auto">
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-xl text-red-600">Emergency Support</CardTitle>
-                    <CardDescription>Immediate resources for crisis situations</CardDescription>
+                    <CardTitle className="text-xl text-red-600">
+                      Emergency Support
+                    </CardTitle>
+                    <CardDescription>
+                      Immediate resources for crisis situations
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <EmergencyContacts />
@@ -228,14 +368,23 @@ const Support = ({ session, setRefetch }) => {
                   {/* Mental Health Articles */}
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-xl text-[#7F76C4]">Mental Health Articles</CardTitle>
-                      <CardDescription>Educational content for awareness</CardDescription>
+                      <CardTitle className="text-xl text-[#7F76C4]">
+                        Mental Health Articles
+                      </CardTitle>
+                      <CardDescription>
+                        Educational content for awareness
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3">
                         {helpData.mentalHealthArticles.map((article, i) => (
                           <li key={i}>
-                            <a href={article.link} target="_blank" rel="noopener noreferrer" className="text-blue-800 hover:underline">
+                            <a
+                              href={article.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-800 hover:underline"
+                            >
                               {article.title}
                             </a>
                           </li>
@@ -243,37 +392,53 @@ const Support = ({ session, setRefetch }) => {
                       </ul>
                     </CardContent>
                     <CardFooter>
-                      <Button variant="outline" className="w-full">View All Articles</Button>
+                      <Button variant="outline" className="w-full">
+                        View All Articles
+                      </Button>
                     </CardFooter>
                   </Card>
 
                   {/* Support Groups */}
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-xl text-[#7F76C4]">Support Groups</CardTitle>
-                      <CardDescription>Connect with others for mutual support</CardDescription>
+                      <CardTitle className="text-xl text-[#7F76C4]">
+                        Support Groups
+                      </CardTitle>
+                      <CardDescription>
+                        Connect with others for mutual support
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3">
                         {helpData.supportGroups.map((group, i) => (
                           <li key={i} className="p-3 bg-gray-50 rounded-md">
                             <h3 className="font-medium">{group.name}</h3>
-                            <p className="text-sm text-gray-600">{group.schedule}</p>
-                            <Badge className="mt-2" variant="outline">{group.mode}</Badge>
+                            <p className="text-sm text-gray-600">
+                              {group.schedule}
+                            </p>
+                            <Badge className="mt-2" variant="outline">
+                              {group.mode}
+                            </Badge>
                           </li>
                         ))}
                       </ul>
                     </CardContent>
                     <CardFooter>
-                      <Button variant="outline" className="w-full">Join a Group</Button>
+                      <Button variant="outline" className="w-full">
+                        Join a Group
+                      </Button>
                     </CardFooter>
                   </Card>
 
                   {/* Recommended Books */}
                   <Card>
                     <CardHeader>
-                      <CardTitle className="text-xl text-[#7F76C4]">Recommended Books</CardTitle>
-                      <CardDescription>Reading material for mental wellness</CardDescription>
+                      <CardTitle className="text-xl text-[#7F76C4]">
+                        Recommended Books
+                      </CardTitle>
+                      <CardDescription>
+                        Reading material for mental wellness
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3">
@@ -282,14 +447,18 @@ const Support = ({ session, setRefetch }) => {
                             <div className="w-16 h-20 bg-gray-200 rounded" />
                             <div>
                               <h3 className="font-medium">{book.title}</h3>
-                              <p className="text-sm text-gray-600">By {book.author}</p>
+                              <p className="text-sm text-gray-600">
+                                By {book.author}
+                              </p>
                             </div>
                           </li>
                         ))}
                       </ul>
                     </CardContent>
                     <CardFooter>
-                      <Button variant="outline" className="w-full">See All Recommendations</Button>
+                      <Button variant="outline" className="w-full">
+                        See All Recommendations
+                      </Button>
                     </CardFooter>
                   </Card>
                 </div>
