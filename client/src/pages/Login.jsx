@@ -48,13 +48,13 @@ const Login = ({ setRefetch }) => {
           currentPassword: password,
         });
 
-        // Auto login
+        // Auto login after signup
         const loginRes = await axios.post("http://localhost:5000/api/user/login", {
           email,
           password,
         });
 
-        handleLoginSuccess(loginRes);
+        await handleLoginSuccess(loginRes);
       } else {
         // LOGIN FLOW
         const res = await axios.post("http://localhost:5000/api/user/login", {
@@ -62,7 +62,7 @@ const Login = ({ setRefetch }) => {
           password,
         });
 
-        handleLoginSuccess(res);
+        await handleLoginSuccess(res);
       }
     } catch (error) {
       console.error("Auth Error:", error.response?.data || error.message);
@@ -72,17 +72,35 @@ const Login = ({ setRefetch }) => {
     }
   };
 
-  const handleLoginSuccess = (res) => {
-    if (res.data?.token && res.data?.userId) {
-      localStorage.setItem("session", res.data.userId);
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("userType", res.data.userType || "basic");
-      setRefetch((prev) => !prev);
-      navigate("/");
-    } else {
-      setErrorMsg("Login failed. Invalid response from server.");
+  const handleLoginSuccess = async (res) => {
+  if (res.data?.token && res.data?.userId) {
+    localStorage.setItem("session", res.data.userId);
+    localStorage.setItem("token", res.data.token);
+
+    try {
+      // 👇 Fetch user with Authorization header
+      const userRes = await axios.get(
+        `http://localhost:5000/api/user/${res.data.userId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${res.data.token}`,
+          },
+        }
+      );
+      const userType = userRes.data?.user?.userType || "basic";
+      localStorage.setItem("userType", userType);
+    } catch (err) {
+      console.warn("Failed to fetch userType:", err);
+      localStorage.setItem("userType", "basic"); // fallback
     }
-  };
+
+    setRefetch((prev) => !prev);
+    navigate("/");
+  } else {
+    setErrorMsg("Login failed. Invalid response from server.");
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-white p-6 gap-8">

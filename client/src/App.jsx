@@ -17,6 +17,7 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import { useState } from "react";
 import { useEffect } from "react";
+import PremiumOnly from "./pages/PremiumOnly"; // adjust path as needed
 
 const queryClient = new QueryClient();
 
@@ -37,7 +38,10 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             {/* Home page always accessible */}
-            <Route path="/" element={<Index session={session} setRefetch={setRefetch} />} />
+            <Route
+              path="/"
+              element={<Index session={session} setRefetch={setRefetch} />}
+            />
 
             {/* Login page: redirect if already logged in */}
             <Route
@@ -54,15 +58,59 @@ const App = () => {
             {/* Protected Routes */}
             {session ? (
               <>
-                <Route path="/dashboard" element={<Dashboard session={session} setRefetch={setRefetch}/>} />
-                <Route path="/meditation" element={<Meditation session={session} setRefetch={setRefetch}/>} />
-                <Route path="/music" element={<Music session={session} setRefetch={setRefetch}/>} />
-                <Route path="/todos" element={<Todos session={session} setRefetch={setRefetch}/>} />
-                <Route path="/appointments" element={<Appointments session={session} setRefetch={setRefetch}/>} />
-                <Route path="/support" element={<Support session={session} setRefetch={setRefetch}/>} />
-                <Route path="/emergency" element={<Emergency session={session} setRefetch={setRefetch}/>} />
-                <Route path="/about" element={<About session={session} setRefetch={setRefetch}/>} />
-                <Route path="/subscription" element={<Subscription session={session} setRefetch={setRefetch}/>} />
+                <Route
+                  path="/dashboard"
+                  element={
+                    <Dashboard session={session} setRefetch={setRefetch} />
+                  }
+                />
+                <Route
+                  path="/meditation"
+                  element={
+                    <Meditation session={session} setRefetch={setRefetch} />
+                  }
+                />
+                <Route
+                  path="/music"
+                  element={<Music session={session} setRefetch={setRefetch} />}
+                />
+                <Route
+                  path="/todos"
+                  element={<Todos session={session} setRefetch={setRefetch} />}
+                />
+                <Route
+                  path="/appointments"
+                  element={
+                    localStorage.getItem("userType") === "premium" ? (
+                      <Appointments session={session} setRefetch={setRefetch} />
+                    ) : (
+                      <PremiumOnly />
+                    )
+                  }
+                />
+
+                <Route
+                  path="/support"
+                  element={
+                    <Support session={session} setRefetch={setRefetch} />
+                  }
+                />
+                <Route
+                  path="/emergency"
+                  element={
+                    <Emergency session={session} setRefetch={setRefetch} />
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={<About session={session} setRefetch={setRefetch} />}
+                />
+                <Route
+                  path="/subscription"
+                  element={
+                    <Subscription session={session} setRefetch={setRefetch} />
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </>
             ) : (
