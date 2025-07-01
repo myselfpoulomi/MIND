@@ -1,6 +1,4 @@
-// server/models/User.js
-
-import mongoose from "mongoose";
+ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -15,7 +13,12 @@ const userSchema = new mongoose.Schema({
   currentPassword: {
     type: String,
     required: true,
-  }
+  },
+  userType: {
+    type: String,
+    enum: ["basic", "premium"],
+    default: "basic",
+  },
 }, { timestamps: true });
 
 const User = mongoose.model("User", userSchema);

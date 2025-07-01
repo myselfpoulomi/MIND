@@ -6,7 +6,7 @@ import {
   loginUser,
   deleteUser,
   updateUser
-} from "../controllers/UserControler.js"
+} from "../controllers/UserControler.js";
 
 const router = express.Router();
 
@@ -14,8 +14,7 @@ router.get("/", getAllUsers);
 router.get("/:id", getUsersbyId);
 router.post("/addUser", addUser);
 router.post("/login", loginUser);
-router.delete("/deleteUser/:id" , deleteUser);
+router.delete("/deleteUser/:id", deleteUser);
 router.put("/updateUser/:id", updateUser);
-
 
 export default router;

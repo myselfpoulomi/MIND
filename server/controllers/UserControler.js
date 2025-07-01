@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 // Get all users
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find().select("-password"); // Exclude passwords
+    const users = await User.find().select("-password");
     res.status(200).json({ users });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch users", error });
@@ -49,20 +49,20 @@ const addUser = async (req, res) => {
       email,
       password: hashedPassword,
       currentPassword: hashedCurrentPassword,
+      userType: "basic", // optional due to schema default
     });
 
     await newUser.save();
 
     res.status(201).json({
       message: "User added successfully",
-      user: { id: newUser._id, email: newUser.email },
+      user: { id: newUser._id, email: newUser.email, userType: newUser.userType },
     });
   } catch (error) {
     console.error("Signup error:", error);
     res.status(500).json({ message: "Failed to add user", error });
   }
 };
-
 
 // User login
 const loginUser = async (req, res) => {
@@ -88,13 +88,13 @@ const loginUser = async (req, res) => {
 
     res.status(200).json({
       token,
-      userId: user._id, // ✅ this is what the frontend needs
+      userId: user._id,
+      userType: user.userType, // ✅ Include userType in login response
     });
   } catch (error) {
     res.status(500).json({ message: "Login failed", error });
   }
 };
-
 
 // Delete a user
 const deleteUser = async (req, res) => {
@@ -113,10 +113,12 @@ const deleteUser = async (req, res) => {
 // Update a user
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { email, password } = req.body;
+  const { email, password, userType } = req.body;
 
   try {
-    const updateData = { email };
+    const updateData = {};
+    if (email) updateData.email = email;
+    if (userType) updateData.userType = userType;
 
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);

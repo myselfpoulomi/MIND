@@ -16,25 +16,31 @@ const Login = ({ setRefetch }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErrorMsg("");
 
     if (!email || !password || (!isLogin && !confirmPassword)) {
-      alert("Please fill in all required fields.");
+      setErrorMsg("Please fill in all required fields.");
+      setLoading(false);
       return;
     }
 
-    if (!isLogin) {
-      // SIGN-UP FLOW
-      if (password !== confirmPassword) {
-        alert("Passwords do not match!");
-        return;
-      }
+    if (!isLogin && password !== confirmPassword) {
+      setErrorMsg("Passwords do not match.");
+      setLoading(false);
+      return;
+    }
 
-      try {
-        // Step 1: Signup
+    try {
+      if (!isLogin) {
+        // SIGN-UP FLOW
         await axios.post("http://localhost:5000/api/user/addUser", {
           email,
           password,
@@ -42,50 +48,39 @@ const Login = ({ setRefetch }) => {
           currentPassword: password,
         });
 
-        // Step 2: Immediately log in
+        // Auto login
         const loginRes = await axios.post("http://localhost:5000/api/user/login", {
           email,
           password,
         });
 
-        if (loginRes.data?.token && loginRes.data?.userId) {
-          localStorage.setItem("session", loginRes.data.userId);
-          localStorage.setItem("token", loginRes.data.token);
-          setRefetch((prev) => !prev);
-          navigate("/");
-        } else {
-          alert("Signup succeeded but auto-login failed.");
-        }
-      } catch (error) {
-        console.error("Signup/Login Error:", error.response?.data || error.message);
-        alert(
-          error.response?.data?.message ||
-          "Something went wrong during sign-up/login."
-        );
-      }
-    } else {
-      // LOGIN FLOW
-      try {
+        handleLoginSuccess(loginRes);
+      } else {
+        // LOGIN FLOW
         const res = await axios.post("http://localhost:5000/api/user/login", {
           email,
           password,
         });
 
-        if (res.data?.token && res.data?.userId) {
-          localStorage.setItem("session", res.data.userId);
-          localStorage.setItem("token", res.data.token);
-          setRefetch((prev) => !prev);
-          navigate("/");
-        } else {
-          alert("Login failed. Invalid response from server.");
-        }
-      } catch (error) {
-        console.error("Login Error:", error.response?.data || error.message);
-        alert(
-          error.response?.data?.message ||
-          "Invalid email or password. Please try again."
-        );
+        handleLoginSuccess(res);
       }
+    } catch (error) {
+      console.error("Auth Error:", error.response?.data || error.message);
+      setErrorMsg(error.response?.data?.message || "Authentication failed.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLoginSuccess = (res) => {
+    if (res.data?.token && res.data?.userId) {
+      localStorage.setItem("session", res.data.userId);
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userType", res.data.userType || "basic");
+      setRefetch((prev) => !prev);
+      navigate("/");
+    } else {
+      setErrorMsg("Login failed. Invalid response from server.");
     }
   };
 
@@ -139,17 +134,27 @@ const Login = ({ setRefetch }) => {
                 />
               )}
             </div>
+
+            {errorMsg && (
+              <p className="text-sm text-red-500 text-center">{errorMsg}</p>
+            )}
+
             <Button
               type="submit"
+              disabled={loading}
               className="w-full bg-[#9b87f5] hover:bg-[#7E69AB] text-white py-2.5 text-lg font-medium rounded-xl transition-colors"
             >
-              {isLogin ? "Login" : "Sign Up"}
+              {loading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
             </Button>
+
             <p className="text-center text-sm text-gray-600">
               {isLogin ? "Don't have an account? " : "Already have an account? "}
               <button
                 type="button"
-                onClick={() => setIsLogin(!isLogin)}
+                onClick={() => {
+                  setIsLogin(!isLogin);
+                  setErrorMsg("");
+                }}
                 className="text-[#9b87f5] hover:text-[#7E69AB] font-semibold transition-colors"
               >
                 {isLogin ? "Sign up here" : "Login here"}
