@@ -8,6 +8,7 @@ const SongSchema = new Schema({
   artist: { type: String, required: true },
   duration: { type: Number }, // in seconds
   album: { type: String },
+  audio_url: { type:String } ,
   playlist: {
     type: String,
     required: true,

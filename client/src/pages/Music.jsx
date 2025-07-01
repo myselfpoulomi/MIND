@@ -22,7 +22,7 @@ const playlists = [
         artist: "Nature Sounds",
         duration: "5:23",
         coverUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/db7eai6te/video/upload/v1751387316/Moh_Moh_Ke_Dhaage_Male_m7qlob.mp3",
       },
       {
         id: "track2",
@@ -30,7 +30,7 @@ const playlists = [
         artist: "Ambient Moods",
         duration: "6:17",
         coverUrl: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/db7eai6te/video/upload/v1751402558/Labon_Ko_Full_Song_Bhool_Bhulaiyaa_mnrkwt.mp3",
       },
       {
         id: "track3",

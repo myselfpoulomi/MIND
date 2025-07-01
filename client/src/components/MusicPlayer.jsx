@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
@@ -12,14 +12,25 @@ const MusicPlayer = ({ title, artist, coverUrl, audioUrl }) => {
 
   const audioRef = useRef(null);
 
-  const togglePlay = () => {
+  // Set initial volume on mount
+  useEffect(() => {
     if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
+      audioRef.current.volume = volume / 100;
+    }
+  }, []);
+
+  const togglePlay = async () => {
+    if (audioRef.current) {
+      try {
+        if (isPlaying) {
+          audioRef.current.pause();
+        } else {
+          await audioRef.current.play();
+        }
+        setIsPlaying(!isPlaying);
+      } catch (error) {
+        console.error("Audio playback failed:", error);
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -31,7 +42,8 @@ const MusicPlayer = ({ title, artist, coverUrl, audioUrl }) => {
 
   const handleLoadedMetadata = () => {
     if (audioRef.current) {
-      setDuration(audioRef.current.duration);
+      const audioDuration = audioRef.current.duration;
+      setDuration(isNaN(audioDuration) ? 0 : audioDuration);
     }
   };
 
@@ -44,8 +56,9 @@ const MusicPlayer = ({ title, artist, coverUrl, audioUrl }) => {
 
   const handleVolumeChange = (value) => {
     if (audioRef.current) {
-      audioRef.current.volume = value[0] / 100;
-      setVolume(value[0]);
+      const newVolume = value[0];
+      audioRef.current.volume = newVolume / 100;
+      setVolume(newVolume);
     }
   };
 
@@ -89,11 +102,7 @@ const MusicPlayer = ({ title, artist, coverUrl, audioUrl }) => {
             </div>
 
             <div className="flex justify-center items-center space-x-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10 rounded-full"
-              >
+              <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full">
                 <SkipBack className="h-5 w-5" />
               </Button>
 
@@ -101,20 +110,16 @@ const MusicPlayer = ({ title, artist, coverUrl, audioUrl }) => {
                 onClick={togglePlay}
                 variant="default"
                 size="icon"
-                className="h-12 w-12 rounded-full bg-mind-purple hover:bg-mind-purple-dark"
+                className="h-12 w-12 rounded-full bg-indigo-600 hover:bg-indigo-700"
               >
                 {isPlaying ? (
-                  <Pause className="h-6 w-6" />
+                  <Pause className="h-6 w-6 text-white" />
                 ) : (
-                  <Play className="h-6 w-6 ml-1" />
+                  <Play className="h-6 w-6 text-white ml-0.5" />
                 )}
               </Button>
 
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-10 w-10 rounded-full"
-              >
+              <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full">
                 <SkipForward className="h-5 w-5" />
               </Button>
             </div>
