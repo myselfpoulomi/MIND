@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   Card,
   CardContent,
@@ -29,7 +31,6 @@ const AppointmentScheduler = ({ onSchedule }) => {
   const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
 
-  // 🔄 Fetch doctors from the API
   useEffect(() => {
     fetch("http://localhost:5000/api/professionals/")
       .then((res) => res.json())
@@ -53,6 +54,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
       time: selectedTime,
       provider: doctor.name,
       notes,
+      meetLink: `https://meet.google.com/pum-juqo-nvv`,
     };
 
     onSchedule(appointmentData);

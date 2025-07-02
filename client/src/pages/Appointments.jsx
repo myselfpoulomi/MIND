@@ -17,7 +17,6 @@ const Appointments = ({ session, setRefetch }) => {
 
       <main className="flex-grow pt-24 pb-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="text-center mb-10">
             <h1 className="text-3xl font-bold text-gray-900">Professional Support</h1>
             <p className="mt-2 text-lg text-gray-600">
@@ -25,12 +24,10 @@ const Appointments = ({ session, setRefetch }) => {
             </p>
           </div>
 
-          {/* Scheduler */}
           <div className="max-w-3xl mx-auto">
             <AppointmentScheduler onSchedule={handleAddAppointment} />
           </div>
 
-          {/* List */}
           <div className="max-w-3xl mx-auto mt-10">
             <AppointmentList appointments={appointments} />
           </div>

@@ -19,6 +19,13 @@ const AppointmentList = ({ appointments }) => {
             <p className="text-gray-700"><strong>Time:</strong> {appt.time}</p>
             <p className="text-gray-700"><strong>With:</strong> {appt.provider}</p>
             <p className="text-gray-600 text-sm">{appt.notes}</p>
+            {appt.meetLink && (
+              <p className="text-blue-600 text-sm mt-2">
+                <a href={appt.meetLink} target="_blank" rel="noopener noreferrer">
+                  Join Google Meet
+                </a>
+              </p>
+            )}
           </li>
         ))}
       </ul>
