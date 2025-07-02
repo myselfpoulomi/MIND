@@ -6,7 +6,7 @@ import cors from 'cors';
 import UserRoutes from './routes/UserRoutes.js'; // User routes
 import MoodRoutes from './routes/MoodRoutes.js'; // Added MoodLog routes
 import MeditationYogaSessionRoutes from './routes/MeditationYogaSessionRoutes.js'
-import SongRoutes from './routes/SongRoutes.js'
+// import SongRoutes from './routes/SongRoutes.js'
 import WellnessTaskRoutes from './routes/WellnessTaskRoutes.js'
 import ProfessionalRoutes from './routes/ProfessionalRoutes.js'
 import ChatSupportRoutes from './routes/ChatSupportRoutes.js'
@@ -38,7 +38,7 @@ mongoose
 app.use("/api/user", UserRoutes); // User routes
 app.use("/api/moodlogs", MoodRoutes); // Added MoodLog routes
 app.use('/api/sessions', MeditationYogaSessionRoutes); 
-app.use('/api/songs', SongRoutes);
+// app.use('/api/songs', SongRoutes);
 app.use('/api/help' , HelpRoutes)
 app.use('/api/tasks', WellnessTaskRoutes);
 app.use('/api/professionals', ProfessionalRoutes);
