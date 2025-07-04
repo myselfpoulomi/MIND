@@ -1,4 +1,3 @@
-// src/components/SubscriptionPlans.jsx
 import { useState, useEffect } from "react";
 import {
   Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
@@ -88,8 +87,7 @@ const SubscriptionPlans = () => {
 
   const handlePayment = async (plan) => {
     const amount = getBillingAmount(plan);
-    const userId = localStorage.getItem("session");
-
+    const userId = localStorage.getItem("session"); // matches how you stored it in Login.jsx
 
     if (!userId) {
       alert("User session not found. Please log in again.");
@@ -102,7 +100,7 @@ const SubscriptionPlans = () => {
     }
 
     const options = {
-      key: "rzp_test_7cs83Ikm791P0j",
+      key: "rzp_test_7cs83Ikm791P0j", // Use your Razorpay test/live key
       amount: amount * 100,
       currency: "INR",
       name: "Mindful Wellness",
@@ -124,6 +122,12 @@ const SubscriptionPlans = () => {
 
           const data = await res.json();
           if (data.success) {
+            // ✅ Update localStorage immediately
+            localStorage.setItem("userType", plan.id);
+
+            // ✅ Optionally refresh UI or trigger global state update
+            window.location.reload(); // remove if using context or setRefetch
+
             alert("Subscription successful!");
           } else {
             alert("Payment processed, but subscription update failed.");
