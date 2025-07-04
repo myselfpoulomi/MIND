@@ -137,11 +137,52 @@ const updateUser = async (req, res) => {
   }
 };
 
+const upgradeUserToPremium = async (req, res) => {
+  const { userId, userType, razorpayPaymentId, billingCycle } = req.body;
+
+  if (!userId || !userType || !razorpayPaymentId || !billingCycle) {
+    return res.status(400).json({
+      success: false,
+      message: "All fields are required.",
+    });
+  }
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { userType },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `User upgraded to ${userType}.`,
+      user,
+    });
+  } catch (error) {
+    console.error("Upgrade error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error.",
+    });
+  }
+};
+
+
+
 export {
   getAllUsers,
   getUsersbyId,
   addUser,
   loginUser,
   deleteUser,
-  updateUser,
+  updateUser, 
+  upgradeUserToPremium
 };
