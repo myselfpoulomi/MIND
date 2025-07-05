@@ -3,21 +3,22 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import Index from "./pages/Index";
-import Dashboard from "./pages/dashboard";
-import Meditation from "./pages/meditation";
-import Music from "./pages/music";
-import Todos from "./pages/todos";
-import Appointments from "./pages/appointments";
-import Support from "./pages/support";
-import Emergency from "./pages/emergency";
-import About from "./pages/about";
-import Subscription from "./pages/subscription";
+import Dashboard from "./pages/Dashboard";
+import Meditation from "./pages/Meditation";
+import Music from "./pages/Music";
+import Todos from "./pages/Todos";
+import Appointments from "./pages/Appointments";
+import Support from "./pages/Support";
+import Emergency from "./pages/Emergency";
+import About from "./pages/About";
+import Subscription from "./pages/Subscription";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import { useState } from "react";
-import { useEffect } from "react";
-import PremiumOnly from "./pages/PremiumOnly"; // adjust path as needed
+import PremiumOnly from "./pages/PremiumOnly";
+
+import { useState, useEffect } from "react";
 
 const queryClient = new QueryClient();
 
@@ -88,7 +89,6 @@ const App = () => {
                     )
                   }
                 />
-
                 <Route
                   path="/support"
                   element={
