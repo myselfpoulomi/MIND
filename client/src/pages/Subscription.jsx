@@ -39,21 +39,21 @@ const faqs = [
 
 const testimonials = [
   {
-    name: "Rahul M.",
-    duration: "Premium user for 6 months",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
+    name: "Sristi R.",
+    duration: "Premium user for 2 months",
+    // image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop",
     text: "The premium subscription has been worth every rupee. The personalized counseling sessions helped me navigate a particularly difficult time in my life, and the meditation content is exceptional. I sleep better and feel more equipped to handle stress.",
   },
   {
     name: "Meera S.",
-    duration: "Premium user for 1 year",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
+    duration: "Premium user for 5 months",
+    // image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop",
     text: "As someone with a busy schedule, I appreciate the flexibility of the video consultations. I can speak with a professional from anywhere, and the advanced analytics really help me understand my mood patterns. The yearly subscription is great value.",
   },
   {
     name: "Vikram T.",
     duration: "Premium user for 3 months",
-    image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop",
+    // image: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=200&auto=format&fit=crop",
     text: "I was hesitant to upgrade, but the premium features have made a real difference. The expert counseling has provided insights I couldn't get elsewhere, and the unlimited music playlists have become part of my daily relaxation routine.",
   },
 ];
@@ -105,8 +105,18 @@ const Subscription = ({session,setRefetch}) => {
 
     <div className="bg-white p-6 rounded-lg shadow-sm text-center">
       <div className="flex flex-col items-center mb-4">
-        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-mind-purple mb-2">
-          <img src={testimonials[testimonialIndex].image} alt={testimonials[testimonialIndex].name} className="w-full h-full object-cover" />
+        <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-mind-purple mb-2 flex items-center justify-center bg-[#E5DEFF]">
+           <span className="text-[#9B87F5] font-bold text-center">
+  {
+    (() => {
+      const nameParts = testimonials[testimonialIndex].name.split(" ");
+      const firstInitial = nameParts[0]?.[0] || "";
+      const lastInitial = nameParts[1]?.[0] || "";
+      return `${firstInitial}${lastInitial}`;
+    })()
+  }
+</span>
+
         </div>
         <h3 className="text-lg font-semibold">{testimonials[testimonialIndex].name}</h3>
         <p className="text-gray-500 text-sm">{testimonials[testimonialIndex].duration}</p>
