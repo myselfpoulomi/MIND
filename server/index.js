@@ -45,6 +45,9 @@ app.use('/api/professionals', ProfessionalRoutes);
 app.use('/api/chat', ChatSupportRoutes);
 app.use('/api/resources', EmergencyResourceRoutes);
 app.use('/api/plans', SubscriptionPlanRoutes);
+app.get('/test', (req,res)=>{
+  res.send("Wokring")
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
