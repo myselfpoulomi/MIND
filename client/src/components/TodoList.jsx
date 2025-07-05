@@ -12,8 +12,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Trash2 } from "lucide-react";
-
-const API_BASE = "http://localhost:5000/api/tasks";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const API_BASE = `${BASE_URL}/api/tasks`;
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);

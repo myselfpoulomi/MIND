@@ -18,7 +18,7 @@ const Login = ({ setRefetch }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -41,7 +41,7 @@ const Login = ({ setRefetch }) => {
     try {
       if (!isLogin) {
         // SIGN-UP FLOW
-        await axios.post("http://localhost:5000/api/user/addUser", {
+        await axios.post(`${BASE_URL}/api/user/addUser`, {
           email,
           password,
           confirmPassword,
@@ -49,7 +49,7 @@ const Login = ({ setRefetch }) => {
         });
 
         // Auto login after signup
-        const loginRes = await axios.post("http://localhost:5000/api/user/login", {
+        const loginRes = await axios.post(`${BASE_URL}/api/user/login`, {
           email,
           password,
         });
@@ -57,7 +57,7 @@ const Login = ({ setRefetch }) => {
         await handleLoginSuccess(loginRes);
       } else {
         // LOGIN FLOW
-        const res = await axios.post("http://localhost:5000/api/user/login", {
+        const res = await axios.post(`${BASE_URL}/api/user/login`, {
           email,
           password,
         });
@@ -80,7 +80,7 @@ const Login = ({ setRefetch }) => {
     try {
       // 👇 Fetch user with Authorization header
       const userRes = await axios.get(
-        `http://localhost:5000/api/user/${res.data.userId}`,
+        `${BASE_URL}/api/user/${res.data.userId}`,
         {
           headers: {
             Authorization: `Bearer ${res.data.token}`,

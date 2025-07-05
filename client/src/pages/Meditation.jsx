@@ -5,13 +5,14 @@ import MeditationCard from "@/components/MeditationCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Meditation = ({ session, setRefetch }) => {
   const [sessionsData, setSessionsData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/sessions/")
+    fetch(`${BASE_URL}/api/sessions/`)
       .then((res) => res.json())
       .then((data) => {
         setSessionsData(data);

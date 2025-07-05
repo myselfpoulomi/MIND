@@ -5,7 +5,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const plans = [
   {
     id: "free",
@@ -107,7 +107,7 @@ const SubscriptionPlans = () => {
       description: `Subscription: ${plan.name} (${billingCycle})`,
       handler: async (response) => {
         try {
-          const res = await fetch("http://localhost:5000/api/user/upgrade", {
+          const res = await fetch(`${BASE_URL}/api/user/upgrade`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

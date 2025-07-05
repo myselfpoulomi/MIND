@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 import {
   Card,
   CardContent,
@@ -32,7 +32,7 @@ const AppointmentScheduler = ({ onSchedule }) => {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/professionals/")
+    fetch(`${BASE_URL}/api/professionals/`)
       .then((res) => res.json())
       .then((data) => setDoctors(data))
       .catch((err) => {

@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, Globe } from "lucide-react";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const EmergencyContacts = () => {
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ const EmergencyContacts = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/resources");
+        const res = await fetch(`${BASE_URL}/api/resource`);
         const data = await res.json();
         setContacts(data);
       } catch (error) {

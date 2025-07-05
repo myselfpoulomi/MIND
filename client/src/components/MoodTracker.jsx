@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const moods = [
   { name: "Happy", emoji: "😊", color: "bg-green-100 border-green-300" },
@@ -44,7 +45,7 @@ const MoodTracker = () => {
       };
 
       try {
-        const response = await axios.post("http://localhost:5000/api/moodlogs/addMood", moodLog);
+        const response = await axios.post(`${BASE_URL}/api/moodlogs/addMood`, moodLog);
 
         console.log("Mood logged:", response.data);
         alert(`Mood logged: ${selectedMood.name} for user ${rawUserId}`);

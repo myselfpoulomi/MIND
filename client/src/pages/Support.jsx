@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import {
@@ -52,7 +54,7 @@ const Support = ({ session, setRefetch }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/help") // replace with your real endpoint
+      .get(`${BASE_URL}/api/help`) // replace with your real endpoint
       .then((res) => {
         setHelpData(res.data[0]); // or just res.data if not an array
         setLoadingResources(false);
