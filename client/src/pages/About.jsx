@@ -37,10 +37,10 @@ const About = ({session,setRefetch}) => {
                   MIND began with a simple observation: despite the growing awareness around mental health, many people still struggle to access the support they need when they need it.
                 </p>
                 <p className="text-gray-600 mb-4">
-                  Founded in 2023, our team of mental health professionals, technologists, and advocates came together with a shared vision – to create a platform that combines evidence-based tools, professional support, and community connection in one accessible place.
+                  Founded in 2023, our team came together with a shared vision – to create a platform that combines evidence-based tools, professional support, and community connection in one accessible place.
                 </p>
                 <p className="text-gray-600">
-                  Today, MIND is helping thousands of people understand their mental health, practice self-care, and connect with professional support when needed. We believe that mental wellbeing is a journey, not a destination, and we're honored to be part of yours.
+                  Today, MIND is ready to help thousands of people understand their mental health, practice self-care, and connect with professional support when needed. We believe that mental wellbeing is a journey, not a destination, and we're honored to be part of yours.
                 </p>
               </div>
               <div className="rounded-lg overflow-hidden shadow-lg">
@@ -108,7 +108,7 @@ const About = ({session,setRefetch}) => {
           </section>
           
           {/* Team Section */}
-          <section className="mb-16">
+          {/* <section className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Our Team</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
@@ -156,10 +156,10 @@ const About = ({session,setRefetch}) => {
                 </p>
               </div>
             </div>
-          </section>
+          </section> */}
           
           {/* Partners Section */}
-          <section className="mb-16">
+          {/* <section className="mb-16">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">Our Partners</h2>
             <div className="flex flex-wrap justify-center gap-8 items-center">
               <div className="w-32 h-20 bg-gray-100 rounded-md flex items-center justify-center">
@@ -178,7 +178,7 @@ const About = ({session,setRefetch}) => {
                 <div className="text-gray-400 font-semibold">Partner 5</div>
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section className="mb-12 bg-[#E5DEFF] p-8 rounded-xl text-center">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Join Our Mission</h2>

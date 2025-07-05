@@ -157,11 +157,11 @@ const Index = ({session,setRefetch}) => {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full bg-[#E5DEFF] flex items-center justify-center">
-                    <span className="text-[#9B87F5] font-bold">RP</span>
+                    <span className="text-[#9B87F5] font-bold">DP</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-semibold">Rahul P.</h4>
-                    <p className="text-sm text-gray-500">Delhi</p>
+                    <h4 className="font-semibold">Deblina P.</h4>
+                    <p className="text-sm text-gray-500">Nadia</p>
                   </div>
                 </div>
                 <p className="text-gray-700">
@@ -174,11 +174,11 @@ const Index = ({session,setRefetch}) => {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full bg-[#D3E4FD] flex items-center justify-center">
-                    <span className="text-[#33C9F5] font-bold">SK</span>
+                    <span className="text-[#33C9F5] font-bold">AG</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-semibold">Sneha K.</h4>
-                    <p className="text-sm text-gray-500">Mumbai</p>
+                    <h4 className="font-semibold">Anirban G.</h4>
+                    <p className="text-sm text-gray-500">Kolkata</p>
                   </div>
                 </div>
                 <p className="text-gray-700">
@@ -191,11 +191,11 @@ const Index = ({session,setRefetch}) => {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12 rounded-full bg-[#FFDEE2] flex items-center justify-center">
-                    <span className="text-pink-500 font-bold">AM</span>
+                    <span className="text-pink-500 font-bold">AN</span>
                   </div>
                   <div className="ml-4">
-                    <h4 className="font-semibold">Arjun M.</h4>
-                    <p className="text-sm text-gray-500">Bangalore</p>
+                    <h4 className="font-semibold">Ansu N.</h4>
+                    <p className="text-sm text-gray-500">Durgapur</p>
                   </div>
                 </div>
                 <p className="text-gray-700">
