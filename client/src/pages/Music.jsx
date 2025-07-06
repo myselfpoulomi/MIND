@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Play } from "lucide-react";
 
-const sampleAudioUrl = "https://assets.mixkit.co/music/preview/mixkit-serene-view-443.mp3";
+const sampleAudioUrl = "https://res.cloudinary.com/dee035lyt/video/upload/v1751817066/30_Minute_Relaxing_Sleep_Music_Sleep_Meditation_Calm_Music_Insomnia_Relax_Study_Sleep_3257B_uatesn.mp3";
 
 const playlists = [
   {
@@ -22,7 +22,7 @@ const playlists = [
         artist: "Nature Sounds",
         duration: "5:23",
         coverUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=200&auto=format&fit=crop",
-        audioUrl: "https://res.cloudinary.com/db7eai6te/video/upload/v1751387316/Moh_Moh_Ke_Dhaage_Male_m7qlob.mp3",
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751814073/30_Minute_Deep_Meditation_Music_for_Positive_Energy_Relax_Mind_Body_Inner_Peace_pzp6ml.mp3",
       },
       {
         id: "track2",
@@ -30,7 +30,7 @@ const playlists = [
         artist: "Ambient Moods",
         duration: "6:17",
         coverUrl: "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?q=80&w=200&auto=format&fit=crop",
-        audioUrl: "https://res.cloudinary.com/db7eai6te/video/upload/v1751402558/Labon_Ko_Full_Song_Bhool_Bhulaiyaa_mnrkwt.mp3",
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751816422/30_MINUTES_Gentle_Rain_at_Night_Rain_Sounds_for_Sleep_Insomnia_Relaxing_Meditation_Yoga_Study_mlnhvn.mp3",
       },
       {
         id: "track3",
@@ -38,7 +38,7 @@ const playlists = [
         artist: "Nature Sounds",
         duration: "4:45",
         coverUrl: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751815080/Forest_In_4K_-_The_Healing_Power_Of_Nature_Sounds_Forest_Sounds_Scenic_Relaxation_Film_c4rstt.mp3",
       },
     ],
   },
@@ -54,7 +54,7 @@ const playlists = [
         artist: "Focus Flow",
         duration: "4:10",
         coverUrl: "https://images.unsplash.com/photo-1470240731273-7821a6eeb6bd?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751816737/QUICK_30_MIN_STUDY_WITH_ME_and_the_cloudsCalm_Piano_or_how_to_overcome_procrastination_cm8mf8.mp3",
       },
       {
         id: "track5",
@@ -62,7 +62,7 @@ const playlists = [
         artist: "Mindful Music",
         duration: "5:32",
         coverUrl: "https://images.unsplash.com/photo-1557682257-2f9c37a3a5f3?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751816078/Pure_40_HZ_Binaural_Beats__The_Frequency_for_FOCUS_MEMORY_and_CONCENTRATION_dahzj2.mp3",
       },
       {
         id: "track6",
@@ -70,7 +70,7 @@ const playlists = [
         artist: "Focus Flow",
         duration: "6:22",
         coverUrl: "https://images.unsplash.com/photo-1533134486753-c833f0ed4866?q=80&w=200&auto=format&fit=crop",
-        audioUrl: sampleAudioUrl,
+        audioUrl: "https://res.cloudinary.com/dee035lyt/video/upload/v1751816078/Pure_40_HZ_Binaural_Beats__The_Frequency_for_FOCUS_MEMORY_and_CONCENTRATION_dahzj2.mp3",
       },
     ],
   },
